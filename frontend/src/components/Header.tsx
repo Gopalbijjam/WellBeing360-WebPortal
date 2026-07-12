@@ -27,9 +27,9 @@ export const Header: React.FC<HeaderProps> = ({
     <header className="header">
       <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
         <h2 style={{ fontSize: '1.25rem', fontWeight: 800 }}>Welcome to WellBeing360</h2>
-        <span className={`badge ${isDemo ? 'badge-warning' : 'badge-success'}`}>
-          {isDemo ? 'Demo Mode (Offline Fallback)' : 'Live Connected'}
-        </span>
+        {isDemo && (
+          <span className="badge badge-warning">Demo Mode (Offline Fallback)</span>
+        )}
       </div>
 
       <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>

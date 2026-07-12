@@ -30,6 +30,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <button className={`btn btn-secondary ${activeTab === 'home' ? 'btn-primary' : ''}`} style={{ justifyContent: 'flex-start' }} onClick={() => setActiveTab('home')}>
           <UserIcon size={18} /> Home Dashboard
         </button>
+        <button className={`btn btn-secondary ${activeTab === 'profile' ? 'btn-primary' : ''}`} style={{ justifyContent: 'flex-start' }} onClick={() => setActiveTab('profile')}>
+          <UserIcon size={18} /> My Profile
+        </button>
 
         {user.role === 'Employee' && (
           <>
@@ -98,9 +101,29 @@ export const Sidebar: React.FC<SidebarProps> = ({
         )}
       </div>
 
-      <div style={{ padding: 24, borderTop: '1px solid var(--glass-border)', background: 'rgba(0,0,0,0.1)' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
-          <div style={{ width: 36, height: 36, borderRadius: '50%', background: 'hsl(var(--primary))', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>
+      <div style={{ padding: 24, borderTop: '1px solid var(--glass-border)', background: 'rgba(0,0,0,0.03)' }}>
+        <div 
+          onClick={() => setActiveTab('profile')}
+          title="View Profile"
+          style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: 12, 
+            marginBottom: 12, 
+            cursor: 'pointer',
+            padding: '6px',
+            borderRadius: '8px',
+            background: activeTab === 'profile' ? 'rgba(0,0,0,0.05)' : 'transparent',
+            transition: 'all 0.2s'
+          }}
+          onMouseOver={e => e.currentTarget.style.background = 'rgba(0,0,0,0.05)'}
+          onMouseOut={e => {
+            if (activeTab !== 'profile') {
+              e.currentTarget.style.background = 'transparent';
+            }
+          }}
+        >
+          <div style={{ width: 36, height: 36, borderRadius: '50%', background: 'hsl(var(--primary))', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', color: 'white' }}>
             {getInitials(user.name)}
           </div>
           <div style={{ flex: 1, minWidth: 0 }}>

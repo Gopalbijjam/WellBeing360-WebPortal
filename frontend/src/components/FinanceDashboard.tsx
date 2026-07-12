@@ -77,7 +77,7 @@ export const FinanceDashboard: React.FC<FinanceDashboardProps> = ({
 
           <div className="glass-panel">
             <h4 style={{ fontWeight: 700, marginBottom: 16 }}>Saved Reports History Logs</h4>
-            <div className="table-wrapper">
+            <div className="table-wrapper" style={{ maxHeight: '360px', overflowY: 'auto' }}>
               <table className="custom-table">
                 <thead>
                   <tr>

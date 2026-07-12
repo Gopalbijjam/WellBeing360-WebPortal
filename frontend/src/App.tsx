@@ -21,6 +21,7 @@ import { RecognitionManagerConsole } from './components/RecognitionManagerConsol
 import { FinanceDashboard } from './components/FinanceDashboard';
 import { AdminConsole } from './components/AdminConsole';
 import { EapBookingConsole } from './components/EapBookingConsole';
+import { ProfilePage } from './components/ProfilePage';
 
 export default function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -501,8 +502,9 @@ export default function App() {
         />
 
         <div className="content-body">
-          {/* Employee Portal view router */}
-          {user.role === 'Employee' ? (
+          {activeTab === 'profile' ? (
+            <ProfilePage user={user} points={points} />
+          ) : user.role === 'Employee' ? (
             <EmployeePortal 
               user={user}
               activeTab={activeTab}

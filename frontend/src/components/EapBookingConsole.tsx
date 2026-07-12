@@ -20,7 +20,7 @@ export const EapBookingConsole: React.FC<EapBookingConsoleProps> = ({
   return (
     <div className="glass-panel">
       <h3 style={{ fontSize: '1.3rem', fontWeight: 700, marginBottom: 16 }}>Confidential EAP Booking Management</h3>
-      <div className="table-wrapper">
+      <div className="table-wrapper" style={{ maxHeight: '420px', overflowY: 'auto' }}>
         <table className="custom-table">
           <thead>
             <tr>

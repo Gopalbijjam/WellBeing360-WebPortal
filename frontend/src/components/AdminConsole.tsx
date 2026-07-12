@@ -25,7 +25,7 @@ export const AdminConsole: React.FC<AdminConsoleProps> = ({
       {activeAdminViewTab === 'users' ? (
         <div className="glass-panel">
           <h4 style={{ fontWeight: 700, marginBottom: 16 }}>Registered Employee Profiles</h4>
-          <div className="table-wrapper">
+          <div className="table-wrapper" style={{ maxHeight: '420px', overflowY: 'auto' }}>
             <table className="custom-table">
               <thead>
                 <tr>
@@ -63,7 +63,7 @@ export const AdminConsole: React.FC<AdminConsoleProps> = ({
       ) : (
         <div className="glass-panel">
           <h4 style={{ fontWeight: 700, marginBottom: 16 }}>System Action Audits (Identity AuditLogs)</h4>
-          <div className="table-wrapper">
+          <div className="table-wrapper" style={{ maxHeight: '420px', overflowY: 'auto' }}>
             <table className="custom-table">
               <thead>
                 <tr>
