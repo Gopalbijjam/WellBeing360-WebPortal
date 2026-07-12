@@ -1,0 +1,6 @@
+@WellBeing360.WellnessService_HostAddress = http://localhost:5255
+
+GET {{WellBeing360.WellnessService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

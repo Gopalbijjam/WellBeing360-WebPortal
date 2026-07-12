@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellBeing360.Gateway", "WellBeing360.Gateway\WellBeing360.Gateway.csproj", "{931A1F6E-06A4-447B-A484-220E67322154}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellBeing360.IdentityService", "WellBeing360.IdentityService\WellBeing360.IdentityService.csproj", "{AD761D08-8855-4276-B2F5-EA952E41CF6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellBeing360.BenefitsService", "WellBeing360.BenefitsService\WellBeing360.BenefitsService.csproj", "{BCCAAECE-4203-41FB-B1DF-97E46EE533E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellBeing360.WellnessService", "WellBeing360.WellnessService\WellBeing360.WellnessService.csproj", "{CC5EEF46-D44D-4638-AA62-D2DDB44B36AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellBeing360.RewardsService", "WellBeing360.RewardsService\WellBeing360.RewardsService.csproj", "{1A9EB2F5-ADC3-4AFB-988D-EEF8EF320417}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{931A1F6E-06A4-447B-A484-220E67322154}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{931A1F6E-06A4-447B-A484-220E67322154}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{931A1F6E-06A4-447B-A484-220E67322154}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{931A1F6E-06A4-447B-A484-220E67322154}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD761D08-8855-4276-B2F5-EA952E41CF6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD761D08-8855-4276-B2F5-EA952E41CF6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD761D08-8855-4276-B2F5-EA952E41CF6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD761D08-8855-4276-B2F5-EA952E41CF6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCCAAECE-4203-41FB-B1DF-97E46EE533E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCCAAECE-4203-41FB-B1DF-97E46EE533E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCCAAECE-4203-41FB-B1DF-97E46EE533E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCCAAECE-4203-41FB-B1DF-97E46EE533E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC5EEF46-D44D-4638-AA62-D2DDB44B36AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC5EEF46-D44D-4638-AA62-D2DDB44B36AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC5EEF46-D44D-4638-AA62-D2DDB44B36AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC5EEF46-D44D-4638-AA62-D2DDB44B36AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A9EB2F5-ADC3-4AFB-988D-EEF8EF320417}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A9EB2F5-ADC3-4AFB-988D-EEF8EF320417}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A9EB2F5-ADC3-4AFB-988D-EEF8EF320417}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A9EB2F5-ADC3-4AFB-988D-EEF8EF320417}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
