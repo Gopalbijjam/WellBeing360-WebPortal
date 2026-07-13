@@ -13,5 +13,6 @@ namespace WellBeing360.IdentityService.Services.Interfaces
         Task<User?> GetUserByIdAsync(int id);
         Task<List<AuditLog>> GetAuditLogsAsync();
         Task LogAuditAsync(string userId, string action, string module);
+        Task<(bool Success, string Message)> UpdateUserStatusAsync(int id, string status);
     }
 }

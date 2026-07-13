@@ -204,6 +204,47 @@ export const FinanceDashboard: React.FC<FinanceDashboardProps> = ({
         .history-row-clickable:hover {
           background: rgba(0,0,0,0.02) !important;
         }
+        
+        .dashboard-split-layout {
+          display: grid;
+          grid-template-columns: 1fr 360px;
+          gap: 30px;
+          align-items: start;
+        }
+        
+        .kpi-summary-grid {
+          display: grid;
+          grid-template-columns: 1fr 2fr;
+          gap: 24px;
+          margin-bottom: 30px;
+        }
+        
+        .indicators-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 20px;
+        }
+
+        .approvals-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+          gap: 30px;
+        }
+
+        @media (max-width: 1200px) {
+          .dashboard-split-layout {
+            grid-template-columns: 1fr;
+          }
+        }
+        
+        @media (max-width: 768px) {
+          .kpi-summary-grid {
+            grid-template-columns: 1fr;
+          }
+          .indicators-grid {
+            grid-template-columns: 1fr;
+          }
+        }
       `}</style>
 
       {/* Header Title Section */}
@@ -278,7 +319,7 @@ export const FinanceDashboard: React.FC<FinanceDashboardProps> = ({
       {activeDashboardTab === 'approvals' ? (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 30 }} className="no-print">
           
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(420px, 1fr))', gap: 30 }}>
+          <div className="approvals-grid">
             
             {/* Benefit Plans Queue */}
             <div className="glass-panel" style={{ margin: 0, padding: 24, display: 'flex', flexDirection: 'column', gap: 20 }}>
@@ -410,7 +451,7 @@ export const FinanceDashboard: React.FC<FinanceDashboardProps> = ({
           </div>
 
           {reportsHistory.length > 0 && activeReport ? (
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 360px', gap: 30, alignItems: 'start' }}>
+            <div className="dashboard-split-layout">
               
               {/* LEFT COLUMN: Active Report Detailed View */}
               <div className="glass-panel print-area" style={{ margin: 0, padding: 24 }}>
@@ -475,7 +516,7 @@ export const FinanceDashboard: React.FC<FinanceDashboardProps> = ({
                 </div>
 
                 {/* Core Summary KPIs */}
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 24, marginBottom: 30 }}>
+                <div className="kpi-summary-grid">
                   
                   {/* Enrollment Ring Meter */}
                   <div style={{ 
@@ -629,7 +670,7 @@ export const FinanceDashboard: React.FC<FinanceDashboardProps> = ({
                   Segmented Service Performance Indicators
                 </h4>
                 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
+                <div className="indicators-grid">
                   
                   {/* Category 1: Wellness Engagement */}
                   <div style={{ border: '1px solid var(--border)', borderRadius: 16, padding: 18 }}>

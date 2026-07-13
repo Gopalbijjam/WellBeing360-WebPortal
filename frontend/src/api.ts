@@ -69,6 +69,13 @@ export const authApi = {
   
   fetchAuditLogs: async (): Promise<AuditLog[]> => {
     return await apiRequest<AuditLog[]>('/auth/audit-logs');
+  },
+
+  updateUserStatus: async (userId: number, status: 'Active' | 'Inactive'): Promise<{ message: string }> => {
+    return await apiRequest<{ message: string }>(`/auth/users/${userId}/status`, {
+      method: 'POST',
+      body: JSON.stringify({ status })
+    });
   }
 };
 

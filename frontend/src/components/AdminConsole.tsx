@@ -4,13 +4,26 @@ import type { User, AuditLog } from '../types';
 interface AdminConsoleProps {
   usersList: User[];
   auditLogs: AuditLog[];
+  onToggleUserStatus: (userId: number, newStatus: 'Active' | 'Inactive') => Promise<void>;
 }
 
 export const AdminConsole: React.FC<AdminConsoleProps> = ({
   usersList,
-  auditLogs
+  auditLogs,
+  onToggleUserStatus
 }) => {
   const [activeAdminViewTab, setActiveAdminViewTab] = useState<'users' | 'audit'>('users');
+  const [togglingId, setTogglingId] = useState<number | null>(null);
+
+  const handleToggle = async (userId: number, currentStatus: string) => {
+    setTogglingId(userId);
+    try {
+      const targetStatus = currentStatus === 'Active' ? 'Inactive' : 'Active';
+      await onToggleUserStatus(userId, targetStatus);
+    } finally {
+      setTogglingId(null);
+    }
+  };
 
   return (
     <div>
@@ -37,6 +50,7 @@ export const AdminConsole: React.FC<AdminConsoleProps> = ({
                   <th>Department</th>
                   <th>Grade</th>
                   <th>Status</th>
+                  <th style={{ textAlign: 'right' }}>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -53,6 +67,16 @@ export const AdminConsole: React.FC<AdminConsoleProps> = ({
                     <td>{u.gradeID}</td>
                     <td>
                       <span className={`badge ${u.status === 'Active' ? 'badge-success' : 'badge-danger'}`}>{u.status}</span>
+                    </td>
+                    <td style={{ textAlign: 'right' }}>
+                      <button 
+                        className={`btn ${u.status === 'Active' ? 'btn-danger' : 'btn-success'}`}
+                        style={{ padding: '6px 12px', fontSize: '0.78rem', borderRadius: 8, fontWeight: 700, minWidth: 100 }}
+                        disabled={togglingId === u.userID}
+                        onClick={() => handleToggle(u.userID, u.status)}
+                      >
+                        {togglingId === u.userID ? 'Saving...' : u.status === 'Active' ? 'Deactivate' : 'Activate'}
+                      </button>
                     </td>
                   </tr>
                 ))}

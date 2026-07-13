@@ -178,5 +178,28 @@ namespace WellBeing360.IdentityService.Services
                 return builder.ToString();
             }
         }
+
+        public async Task<(bool Success, string Message)> UpdateUserStatusAsync(int id, string status)
+        {
+            var user = await _repository.GetUserByIdAsync(id);
+            if (user == null)
+            {
+                return (false, "User not found.");
+            }
+
+            if (status != "Active" && status != "Inactive")
+            {
+                return (false, "Invalid status specified. Status must be Active or Inactive.");
+            }
+
+            var oldStatus = user.Status;
+            user.Status = status;
+            await _repository.SaveChangesAsync();
+
+            // Log security audit log event
+            await LogAuditAsync(user.UserID.ToString(), $"Updated user status from {oldStatus} to {status}", "Identity");
+
+            return (true, $"User status updated to {status} successfully.");
+        }
     }
 }

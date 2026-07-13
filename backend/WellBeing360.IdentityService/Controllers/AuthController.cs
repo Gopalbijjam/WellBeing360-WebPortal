@@ -132,5 +132,23 @@ namespace WellBeing360.IdentityService.Controllers
             var logs = await _identityService.GetAuditLogsAsync();
             return Ok(logs);
         }
+
+        [HttpPost("users/{id}/status")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> UpdateUserStatus(int id, [FromBody] UpdateUserStatusRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _identityService.UpdateUserStatusAsync(id, request.Status);
+            if (!result.Success)
+            {
+                return BadRequest(result.Message);
+            }
+
+            return Ok(new { Message = result.Message });
+        }
     }
 }

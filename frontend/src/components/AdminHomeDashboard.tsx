@@ -530,7 +530,7 @@ export const AdminHomeDashboard: React.FC<AdminHomeDashboardProps> = ({
           {awards.length === 0 ? (
             <p style={{ color: 'hsl(var(--text-muted))' }}>No peer nominations logged yet.</p>
           ) : (
-            <div className="table-wrapper">
+            <div className="table-wrapper" style={{ maxHeight: '350px', overflowY: 'auto' }}>
               <table className="custom-table">
                 <thead>
                   <tr>
@@ -543,7 +543,7 @@ export const AdminHomeDashboard: React.FC<AdminHomeDashboardProps> = ({
                   </tr>
                 </thead>
                 <tbody>
-                  {awards.slice(0, 5).map(award => (
+                  {awards.map(award => (
                     <tr key={award.awardID}>
                       <td>{award.nominatorID}</td>
                       <td style={{ fontWeight: 700 }}>{award.recipientID}</td>

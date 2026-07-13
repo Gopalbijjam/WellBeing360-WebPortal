@@ -32,6 +32,7 @@ export const WellnessCoordinatorConsole: React.FC<WellnessCoordinatorConsoleProp
   const [newChalType, setNewChalType] = useState('Steps');
   const [newChalTarget, setNewChalTarget] = useState(10000);
   const [newChalPoints, setNewChalPoints] = useState(100);
+  const [selectedProgramID, setSelectedProgramID] = useState<number>(0);
 
   const [focusedInput, setFocusedInput] = useState<string | null>(null);
 
@@ -64,8 +65,9 @@ export const WellnessCoordinatorConsole: React.FC<WellnessCoordinatorConsoleProp
     e.preventDefault();
     setIsSubmitting(true);
     try {
+      const targetProgId = selectedProgramID || (programs.length > 0 ? programs[0].programID : 1);
       await createChallenge({
-        programID: 1,
+        programID: targetProgId,
         challengeName: newChalName,
         activityType: newChalType,
         dailyTarget: newChalTarget,
@@ -74,6 +76,7 @@ export const WellnessCoordinatorConsole: React.FC<WellnessCoordinatorConsoleProp
         status: "Active"
       });
       setNewChalName('');
+      setSelectedProgramID(0);
       closeModal();
     } finally {
       setIsSubmitting(false);
@@ -196,6 +199,26 @@ export const WellnessCoordinatorConsole: React.FC<WellnessCoordinatorConsoleProp
             {/* Challenge Form */}
             {activeModal === 'challenge' && (
               <form onSubmit={handleChallengeSubmit}>
+                <div className="form-group" style={{ marginBottom: 18 }}>
+                  <label className="form-label" style={{ fontSize: '0.82rem', fontWeight: 700, color: '#475569', marginBottom: 6 }}>Wellness Program</label>
+                  <select 
+                    className="form-select" 
+                    style={getSelectStyle('chalprog')} 
+                    value={selectedProgramID || (programs.length > 0 ? programs[0].programID : '')} 
+                    onChange={e => setSelectedProgramID(Number(e.target.value))}
+                    onFocus={() => setFocusedInput('chalprog')} 
+                    onBlur={() => setFocusedInput(null)}
+                    required
+                  >
+                    {programs.length === 0 ? (
+                      <option value="">No Active Programs Available</option>
+                    ) : programs.map(p => (
+                      <option key={p.programID} value={p.programID}>
+                        {p.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
                 <div className="form-group" style={{ marginBottom: 18 }}>
                   <label className="form-label" style={{ fontSize: '0.82rem', fontWeight: 700, color: '#475569', marginBottom: 6 }}>Challenge Name</label>
                   <input className="form-input" style={getInputStyle('chalname')} type="text" placeholder="E.g., 10K Daily Walk Sprint"
@@ -350,38 +373,40 @@ export const WellnessCoordinatorConsole: React.FC<WellnessCoordinatorConsoleProp
               </p>
             </div>
           ) : (
-            <div className="table-wrapper" style={{ maxHeight: '520px', overflowY: 'auto' }}>
-              <table className="custom-table">
-                <thead>
-                  <tr>
-                    <th>Employee ID</th>
-                    <th>Challenge</th>
-                    <th>Value</th>
-                    <th>Points</th>
-                    <th style={{ textAlign: 'right' }}>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {pendingLogs.map(l => (
-                    <tr key={l.logID}>
-                      <td style={{ fontWeight: 700, color: '#334155' }}>{l.employeeID}</td>
-                      <td style={{ color: '#475569' }}>Challenge #{l.challengeID}</td>
-                      <td style={{ fontWeight: 700 }}>{l.activityValue}</td>
-                      <td style={{ color: '#00b587', fontWeight: 700 }}>+{l.pointsEarned} pts</td>
-                      <td>
-                        <div style={{ display: 'flex', gap: 6, justifyContent: 'flex-end' }}>
-                          <button className="btn btn-success" style={{ padding: '6px 12px', fontSize: '0.8rem', fontWeight: 700, borderRadius: 8, display: 'flex', alignItems: 'center', gap: 4 }} onClick={() => verifyLog(l.logID, true)}>
-                            <CheckCircle size={14} /> Approve
-                          </button>
-                          <button className="btn btn-danger" style={{ padding: '6px 12px', fontSize: '0.8rem', fontWeight: 700, borderRadius: 8, display: 'flex', alignItems: 'center', gap: 4 }} onClick={() => verifyLog(l.logID, false)}>
-                            <XCircle size={14} /> Deny
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 20, maxHeight: '520px', overflowY: 'auto', paddingRight: 4 }}>
+              {pendingLogs.map(l => (
+                <div key={l.logID} style={{ border: '1px solid var(--border)', borderRadius: 12, padding: 18, background: '#ffffff', display: 'flex', flexDirection: 'column', gap: 12, boxShadow: '0 4px 12px rgba(0,0,0,0.02)' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                    <div>
+                      <span style={{ fontSize: '0.72rem', fontWeight: 600, color: '#64748b', textTransform: 'uppercase' }}>Employee ID</span>
+                      <h5 style={{ fontWeight: 700, fontSize: '0.95rem', color: '#1e293b', marginTop: 2 }}>{l.employeeID}</h5>
+                    </div>
+                    <span className="badge badge-success" style={{ background: '#00b587', color: 'white', fontWeight: 700, borderRadius: 20, padding: '4px 10px', fontSize: '0.78rem' }}>
+                      +{l.pointsEarned} pts
+                    </span>
+                  </div>
+                  
+                  <div style={{ borderTop: '1px solid rgba(0,0,0,0.05)', paddingTop: 10, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+                    <div>
+                      <span style={{ color: '#64748b', display: 'block', fontSize: '0.72rem', fontWeight: 600 }}>Challenge</span>
+                      <span style={{ fontWeight: 600, color: '#334155', fontSize: '0.85rem' }}>Challenge #{l.challengeID}</span>
+                    </div>
+                    <div style={{ textAlign: 'right' }}>
+                      <span style={{ color: '#64748b', display: 'block', fontSize: '0.72rem', fontWeight: 600 }}>Activity Value</span>
+                      <span style={{ fontWeight: 700, color: '#0f172a', fontSize: '0.9rem' }}>{l.activityValue}</span>
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'flex', gap: 10, marginTop: 4 }}>
+                    <button className="btn btn-success" style={{ flex: 1, padding: '8px 12px', fontSize: '0.85rem', height: 36, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 4, borderRadius: 8, fontWeight: 700 }} onClick={() => verifyLog(l.logID, true)}>
+                      <CheckCircle size={14} /> Approve
+                    </button>
+                    <button className="btn btn-danger" style={{ flex: 1, padding: '8px 12px', fontSize: '0.85rem', height: 36, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 4, borderRadius: 8, fontWeight: 700 }} onClick={() => verifyLog(l.logID, false)}>
+                      <XCircle size={14} /> Deny
+                    </button>
+                  </div>
+                </div>
+              ))}
             </div>
           )}
         </div>

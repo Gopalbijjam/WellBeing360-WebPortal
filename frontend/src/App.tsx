@@ -382,6 +382,16 @@ export default function App() {
     }
   };
 
+  const handleToggleUserStatus = async (userId: number, newStatus: 'Active' | 'Inactive') => {
+    try {
+      await authApi.updateUserStatus(userId, newStatus);
+      showToast(`User account status updated to ${newStatus}.`);
+      fetchCoreData();
+    } catch (e: any) {
+      showToast(e.message || "Failed to update user status.", "error");
+    }
+  };
+
   // --- Employee Action Hooks ---
 
   const handleLogActivity = async (challengeID: number, activityValue: number) => {
@@ -522,6 +532,7 @@ export default function App() {
           <AdminConsole
             usersList={usersList}
             auditLogs={auditLogs}
+            onToggleUserStatus={handleToggleUserStatus}
           />
         );
       default:
