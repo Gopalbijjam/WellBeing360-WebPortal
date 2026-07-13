@@ -119,6 +119,18 @@ export const benefitsApi = {
   
   fetchMyDependents: async (): Promise<Dependent[]> => {
     return await apiRequest<Dependent[]>('/benefits/my-dependents');
+  },
+
+  approvePlan: async (id: number): Promise<void> => {
+    await apiRequest<void>(`/benefits/plans/${id}/approve`, {
+      method: 'POST'
+    });
+  },
+  
+  rejectPlan: async (id: number): Promise<void> => {
+    await apiRequest<void>(`/benefits/plans/${id}/reject`, {
+      method: 'POST'
+    });
   }
 };
 
@@ -238,6 +250,18 @@ export const rewardsApi = {
   
   readNotification: async (id: number): Promise<void> => {
     await apiRequest<void>(`/rewards/notifications/${id}/read`, {
+      method: 'POST'
+    });
+  },
+
+  approveCatalogItem: async (id: number): Promise<void> => {
+    await apiRequest<void>(`/rewards/catalog/${id}/approve`, {
+      method: 'POST'
+    });
+  },
+
+  rejectCatalogItem: async (id: number): Promise<void> => {
+    await apiRequest<void>(`/rewards/catalog/${id}/reject`, {
       method: 'POST'
     });
   },

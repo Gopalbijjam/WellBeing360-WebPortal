@@ -344,6 +344,50 @@ export const Login: React.FC<LoginProps> = ({ handleLogin }) => {
               <button type="submit" disabled={isLoading} className="btn btn-primary" style={{ width: '100%', height: 48, fontSize: '1rem', fontWeight: 700, borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, background: 'linear-gradient(135deg, #00d09c, #00b587)', boxShadow: '0 4px 12px rgba(0, 208, 156, 0.2)' }}>
                 <LogIn size={18} /> {isLoading ? 'Authenticating...' : 'Sign In'}
               </button>
+
+              <div style={{ marginTop: 24, borderTop: '1px dashed #e2e8f0', paddingTop: 20 }}>
+                <p style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: 700, textAlign: 'center', marginBottom: 12 }}>
+                  Quick Demo Login
+                </p>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+                  {DEMO_USERS.map((demo) => (
+                    <button
+                      key={demo.role}
+                      type="button"
+                      onClick={() => handleQuickLogin(demo.email, demo.password)}
+                      disabled={isLoading}
+                      style={{
+                        padding: '8px 12px',
+                        fontSize: '0.8rem',
+                        fontWeight: 600,
+                        textAlign: 'left',
+                        background: '#f8fafc',
+                        border: '1px solid #e2e8f0',
+                        borderRadius: '8px',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s',
+                        color: '#334155',
+                        display: 'block',
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis'
+                      }}
+                      onMouseOver={(e) => {
+                        e.currentTarget.style.background = 'rgba(0, 208, 156, 0.05)';
+                        e.currentTarget.style.borderColor = '#00d09c';
+                        e.currentTarget.style.color = '#00b587';
+                      }}
+                      onMouseOut={(e) => {
+                        e.currentTarget.style.background = '#f8fafc';
+                        e.currentTarget.style.borderColor = '#e2e8f0';
+                        e.currentTarget.style.color = '#334155';
+                      }}
+                    >
+                      {demo.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
             </form>
           ) : (
             <form onSubmit={handleRegisterFormSubmit}>

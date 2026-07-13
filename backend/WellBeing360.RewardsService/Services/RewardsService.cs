@@ -138,9 +138,20 @@ namespace WellBeing360.RewardsService.Services
 
         public async Task<RedemptionCatalog> CreateCatalogItemAsync(RedemptionCatalog item)
         {
+            item.Status = "PendingApproval";
             await _repository.AddCatalogItemAsync(item);
             await _repository.SaveChangesAsync();
             return item;
+        }
+
+        public async Task<RedemptionCatalog?> GetCatalogItemByIdAsync(int id)
+        {
+            return await _repository.GetCatalogItemByIdAsync(id);
+        }
+
+        public async Task UpdateCatalogItemAsync(RedemptionCatalog item)
+        {
+            await _repository.SaveChangesAsync();
         }
 
         public async Task<(bool Success, string Message, int RemainingBalance)> RedeemItemAsync(string employeeId, RedeemRequest request)

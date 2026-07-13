@@ -30,6 +30,7 @@ namespace WellBeing360.BenefitsService.Services
 
         public async Task<BenefitPlan> CreatePlanAsync(BenefitPlan plan)
         {
+            plan.Status = "PendingApproval";
             await _repository.AddPlanAsync(plan);
             await _repository.SaveChangesAsync();
             return plan;

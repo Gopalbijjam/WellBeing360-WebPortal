@@ -171,16 +171,17 @@ export const RecognitionManagerConsole: React.FC<RecognitionManagerConsoleProps>
             <table className="custom-table" style={{ width: '100%' }}>
               <thead>
                 <tr>
-                  <th style={{ width: '40%' }}>Item Name</th>
-                  <th style={{ width: '25%' }}>Category</th>
-                  <th style={{ width: '20%' }}>Points Cost</th>
+                  <th style={{ width: '35%' }}>Item Name</th>
+                  <th style={{ width: '20%' }}>Category</th>
+                  <th style={{ width: '15%' }}>Points Cost</th>
+                  <th style={{ width: '15%' }}>Status</th>
                   <th style={{ width: '15%', textAlign: 'right' }}>Stock</th>
                 </tr>
               </thead>
               <tbody>
                 {catalog.length === 0 ? (
                   <tr>
-                    <td colSpan={4} style={{ textAlign: 'center', color: '#64748b', padding: '24px 0' }}>No catalog items registered.</td>
+                    <td colSpan={5} style={{ textAlign: 'center', color: '#64748b', padding: '24px 0' }}>No catalog items registered.</td>
                   </tr>
                 ) : catalog.map(item => (
                   <tr key={item.itemID}>
@@ -189,6 +190,11 @@ export const RecognitionManagerConsole: React.FC<RecognitionManagerConsoleProps>
                       <span className="badge badge-primary">{item.category}</span>
                     </td>
                     <td style={{ color: '#fbbf24', fontWeight: 800 }}>{item.pointsRequired} pts</td>
+                    <td>
+                      <span className={`badge ${item.status === 'Available' ? 'badge-success' : item.status === 'PendingApproval' ? 'badge-warning' : 'badge-danger'}`}>
+                        {item.status || 'Available'}
+                      </span>
+                    </td>
                     <td style={{ textAlign: 'right', fontWeight: 600, color: '#334155' }}>{item.availableQuantity} units</td>
                   </tr>
                 ))}

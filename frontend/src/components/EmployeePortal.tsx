@@ -301,7 +301,7 @@ export const EmployeePortal: React.FC<EmployeePortalProps> = ({
                 <div className="form-group" style={{ marginBottom: 20 }}>
                   <label className="form-label" style={{ fontWeight: 700, color: '#475569', fontSize: '0.85rem' }}>Select Benefit Plan</label>
                   <select className="form-select" style={getSelectStyle()} value={enrolPlanID} onChange={e => setEnrolPlanID(Number(e.target.value))}>
-                    {plans.map(p => (
+                    {plans.filter(p => p.status === 'Active').map(p => (
                       <option key={p.planID} value={p.planID}>{p.planName} (${p.employeeContribution}/mo)</option>
                     ))}
                   </select>
@@ -413,7 +413,7 @@ export const EmployeePortal: React.FC<EmployeePortalProps> = ({
               );
             })()}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16, maxHeight: '520px', overflowY: 'auto', paddingRight: '6px' }}>
-              {plans.map(p => (
+              {plans.filter(p => p.status === 'Active').map(p => (
                 <div key={p.planID} style={{ padding: 20, border: '1px solid var(--glass-border)', borderRadius: 12, background: 'rgba(255,255,255,0.01)' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
                     <h4 style={{ fontWeight: 700 }}>{p.planName}</h4>
@@ -754,7 +754,7 @@ export const EmployeePortal: React.FC<EmployeePortalProps> = ({
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24 }}>
-          {catalog.map(item => (
+          {catalog.filter(item => item.status !== 'PendingApproval').map(item => (
             <div key={item.itemID} className="glass-panel" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', marginBottom: 0 }}>
               <div>
                 <span className="badge badge-info" style={{ marginBottom: 12 }}>{item.category}</span>

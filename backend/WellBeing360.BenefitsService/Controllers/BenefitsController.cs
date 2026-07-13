@@ -65,6 +65,36 @@ namespace WellBeing360.BenefitsService.Controllers
             return CreatedAtAction(nameof(GetPlanById), new { id = created.PlanID }, created);
         }
 
+        [HttpPost("plans/{id}/approve")]
+        [Authorize(Roles = "Admin,Finance")]
+        public async Task<IActionResult> ApprovePlan(int id)
+        {
+            var plan = await _benefitsService.GetPlanByIdAsync(id);
+            if (plan == null)
+            {
+                return NotFound("Benefit plan not found.");
+            }
+
+            plan.Status = "Active";
+            await _benefitsService.UpdatePlanAsync(plan);
+            return Ok(plan);
+        }
+
+        [HttpPost("plans/{id}/reject")]
+        [Authorize(Roles = "Admin,Finance")]
+        public async Task<IActionResult> RejectPlan(int id)
+        {
+            var plan = await _benefitsService.GetPlanByIdAsync(id);
+            if (plan == null)
+            {
+                return NotFound("Benefit plan not found.");
+            }
+
+            plan.Status = "Rejected";
+            await _benefitsService.UpdatePlanAsync(plan);
+            return Ok(plan);
+        }
+
         [HttpPut("plans/{id}")]
         [Authorize(Roles = "Admin,HRBenefitsAdmin")]
         public async Task<IActionResult> UpdatePlan(int id, [FromBody] BenefitPlan plan)

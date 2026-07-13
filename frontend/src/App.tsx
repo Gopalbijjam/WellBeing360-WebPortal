@@ -22,6 +22,7 @@ import { FinanceDashboard } from './components/FinanceDashboard';
 import { AdminConsole } from './components/AdminConsole';
 import { EapBookingConsole } from './components/EapBookingConsole';
 import { ProfilePage } from './components/ProfilePage';
+import { AdminHomeDashboard } from './components/AdminHomeDashboard';
 
 export default function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -198,6 +199,12 @@ export default function App() {
       if (activeTab === 'reports') {
         const hist = await rewardsApi.fetchReportsHistory();
         setReportsHistory(hist);
+        if (user.role === 'Finance' || user.role === 'Admin') {
+          const pl = await benefitsApi.fetchPlans();
+          setPlans(pl);
+          const cat = await rewardsApi.fetchCatalog();
+          setCatalog(cat);
+        }
       }
 
       if (activeTab === 'users') {
@@ -322,6 +329,46 @@ export default function App() {
       fetchCoreData();
     } catch (e: any) {
       showToast("Failed to generate report", "error");
+    }
+  };
+
+  const handleApprovePlan = async (id: number) => {
+    try {
+      await benefitsApi.approvePlan(id);
+      showToast("Benefit Plan approved successfully!");
+      fetchCoreData();
+    } catch (e: any) {
+      showToast("Failed to approve plan", "error");
+    }
+  };
+
+  const handleRejectPlan = async (id: number) => {
+    try {
+      await benefitsApi.rejectPlan(id);
+      showToast("Benefit Plan rejected.");
+      fetchCoreData();
+    } catch (e: any) {
+      showToast("Failed to reject plan", "error");
+    }
+  };
+
+  const handleApproveCatalogItem = async (id: number) => {
+    try {
+      await rewardsApi.approveCatalogItem(id);
+      showToast("Catalog item approved successfully!");
+      fetchCoreData();
+    } catch (e: any) {
+      showToast("Failed to approve catalog item", "error");
+    }
+  };
+
+  const handleRejectCatalogItem = async (id: number) => {
+    try {
+      await rewardsApi.rejectCatalogItem(id);
+      showToast("Catalog item rejected.");
+      fetchCoreData();
+    } catch (e: any) {
+      showToast("Failed to reject catalog item", "error");
     }
   };
 
@@ -461,6 +508,12 @@ export default function App() {
           <FinanceDashboard
             reportsHistory={reportsHistory}
             generateReport={handleGenerateReport}
+            plans={plans}
+            catalog={catalog}
+            approvePlan={handleApprovePlan}
+            rejectPlan={handleRejectPlan}
+            approveCatalogItem={handleApproveCatalogItem}
+            rejectCatalogItem={handleRejectCatalogItem}
           />
         );
       case 'Admin':
@@ -528,27 +581,25 @@ export default function App() {
             />
           ) : (
             // Render specialist administrative views
-            renderActiveAdminView() || <EmployeePortal 
-              user={user}
-              activeTab='home'
-              setActiveTab={setActiveTab}
-              points={null}
-              myLogs={[]}
-              mySessions={[]}
-              myEnrolments={[]}
-              plans={plans}
-              windows={windows}
-              challenges={challenges}
-              leaderboard={[]}
-              eapServices={eapServices}
-              awards={awards}
-              catalog={catalog}
-              submitActivityLog={handleLogActivity}
-              bookEapSession={handleBookEap}
-              submitEnrolment={handleEnrollBenefit}
-              nominatePeer={handleNominateColleague}
-              redeemItem={handleRedeemReward}
-            />
+            renderActiveAdminView() || (
+              <AdminHomeDashboard
+                user={user}
+                setActiveTab={setActiveTab}
+                usersList={usersList}
+                auditLogs={auditLogs}
+                allEnrolments={allEnrolments}
+                plans={plans}
+                windows={windows}
+                pendingLogs={pendingLogs}
+                challenges={challenges}
+                programs={programs}
+                catalog={catalog}
+                awards={awards}
+                reportsHistory={reportsHistory}
+                handleVerifyLog={handleVerifyLog}
+                handleVerifyEnrolment={handleVerifyEnrolment}
+              />
+            )
           )}
         </div>
       </main>

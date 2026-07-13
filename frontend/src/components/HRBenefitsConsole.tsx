@@ -301,19 +301,20 @@ export const HRBenefitsConsole: React.FC<HRBenefitsConsoleProps> = ({
           <div className="glass-panel" style={{ background: '#ffffff', border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 10px 30px -10px rgba(0,0,0,0.03)', width: '100%', margin: 0 }}>
             <h4 style={{ fontWeight: 800, fontSize: '1.1rem', marginBottom: 16, color: '#0f172a' }}>Benefits Directory</h4>
             <div className="table-wrapper" style={{ maxHeight: '420px', overflowY: 'auto' }}>
-              <table className="custom-table" style={{ width: '100%', tableLayout: 'auto' }}>
+              <table className="custom-table" style={{ width: '100%', tableLayout: 'fixed' }}>
                 <thead>
                   <tr>
-                    <th style={{ width: '35%' }}>Plan Name</th>
-                    <th style={{ width: '25%' }}>Type</th>
-                    <th style={{ width: '20%' }}>Eligible Grades</th>
+                    <th style={{ width: '30%' }}>Plan Name</th>
+                    <th style={{ width: '20%' }}>Type</th>
+                    <th style={{ width: '15%' }}>Eligible Grades</th>
+                    <th style={{ width: '15%' }}>Status</th>
                     <th style={{ width: '20%', textAlign: 'right' }}>Coverage Limit</th>
                   </tr>
                 </thead>
                 <tbody>
                   {plans.length === 0 ? (
                     <tr>
-                      <td colSpan={4} style={{ textAlign: 'center', color: '#64748b', padding: '24px 0' }}>No benefits plans configured yet.</td>
+                      <td colSpan={5} style={{ textAlign: 'center', color: '#64748b', padding: '24px 0' }}>No benefits plans configured yet.</td>
                     </tr>
                   ) : plans.map(p => (
                     <tr key={p.planID}>
@@ -322,6 +323,11 @@ export const HRBenefitsConsole: React.FC<HRBenefitsConsoleProps> = ({
                         <span className="badge badge-info">{p.planType}</span>
                       </td>
                       <td style={{ fontWeight: 600, color: '#334155' }}>{p.eligibilityGrade}</td>
+                      <td>
+                        <span className={`badge ${p.status === 'Active' ? 'badge-success' : p.status === 'PendingApproval' ? 'badge-warning' : 'badge-danger'}`}>
+                          {p.status || 'Active'}
+                        </span>
+                      </td>
                       <td style={{ textAlign: 'right', fontWeight: 700, color: '#0f172a' }}>${p.coverageLimit.toLocaleString()}</td>
                     </tr>
                   ))}

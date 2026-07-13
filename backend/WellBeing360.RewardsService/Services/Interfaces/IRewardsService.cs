@@ -19,6 +19,8 @@ namespace WellBeing360.RewardsService.Services.Interfaces
         Task<List<RedemptionCatalog>> GetCatalogAsync();
         Task<RedemptionCatalog> CreateCatalogItemAsync(RedemptionCatalog item);
         Task<(bool Success, string Message, int RemainingBalance)> RedeemItemAsync(string employeeId, RedeemRequest request);
+        Task<RedemptionCatalog?> GetCatalogItemByIdAsync(int id);
+        Task UpdateCatalogItemAsync(RedemptionCatalog item);
 
         // Notifications
         Task<List<Notification>> GetMyNotificationsAsync(string employeeId);

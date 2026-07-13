@@ -98,6 +98,36 @@ namespace WellBeing360.RewardsService.Controllers
             return Ok(created);
         }
 
+        [HttpPost("catalog/{id}/approve")]
+        [Authorize(Roles = "Admin,Finance")]
+        public async Task<IActionResult> ApproveCatalogItem(int id)
+        {
+            var item = await _rewardsService.GetCatalogItemByIdAsync(id);
+            if (item == null)
+            {
+                return NotFound("Catalog item not found.");
+            }
+
+            item.Status = "Available";
+            await _rewardsService.UpdateCatalogItemAsync(item);
+            return Ok(item);
+        }
+
+        [HttpPost("catalog/{id}/reject")]
+        [Authorize(Roles = "Admin,Finance")]
+        public async Task<IActionResult> RejectCatalogItem(int id)
+        {
+            var item = await _rewardsService.GetCatalogItemByIdAsync(id);
+            if (item == null)
+            {
+                return NotFound("Catalog item not found.");
+            }
+
+            item.Status = "Rejected";
+            await _rewardsService.UpdateCatalogItemAsync(item);
+            return Ok(item);
+        }
+
         [HttpPost("redeem")]
         public async Task<IActionResult> RedeemItem([FromBody] RedeemRequest request)
         {
