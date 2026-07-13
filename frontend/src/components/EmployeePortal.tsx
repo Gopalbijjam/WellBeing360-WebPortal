@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Heart, Activity, Calendar, Award, Star, Plus, ShieldAlert, Trash2, X
 } from 'lucide-react';
@@ -59,7 +59,31 @@ export const EmployeePortal: React.FC<EmployeePortalProps> = ({
 
   // Wellness state
   const [newLogValue, setNewLogValue] = useState<number>(0);
-  const [selectedChallengeID, setSelectedChallengeID] = useState<number>(challenges[0]?.challengeID || 1);
+  const [enrolledChallenges, setEnrolledChallenges] = useState<number[]>(() => {
+    const saved = localStorage.getItem(`enrolled_challenges_${user.employeeID}`);
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  const enrolledChallengeIds = Array.from(new Set([
+    ...enrolledChallenges,
+    ...myLogs.map(l => l.challengeID)
+  ]));
+
+  const [selectedChallengeID, setSelectedChallengeID] = useState<number>(() => {
+    return enrolledChallengeIds[0] || (challenges[0]?.challengeID || 1);
+  });
+
+  useEffect(() => {
+    if (enrolledChallengeIds.length > 0 && !enrolledChallengeIds.includes(selectedChallengeID)) {
+      setSelectedChallengeID(enrolledChallengeIds[0]);
+    }
+  }, [enrolledChallengeIds, selectedChallengeID]);
+
+  const handleEnrolChallenge = (challengeID: number) => {
+    const updated = [...enrolledChallenges, challengeID];
+    setEnrolledChallenges(updated);
+    localStorage.setItem(`enrolled_challenges_${user.employeeID}`, JSON.stringify(updated));
+  };
 
   // EAP Booking State
   const [eapServiceID, setEapServiceID] = useState<number>(eapServices[0]?.serviceID || 1);
@@ -471,32 +495,77 @@ export const EmployeePortal: React.FC<EmployeePortalProps> = ({
           <form onSubmit={handleLogActivityFormSubmit}>
             <div className="form-group">
               <label className="form-label">Select Active Challenge</label>
-              <select className="form-select" value={selectedChallengeID} onChange={e => setSelectedChallengeID(Number(e.target.value))}>
-                {challenges.map(c => (
-                  <option key={c.challengeID} value={c.challengeID}>{c.challengeName} (Target: {c.dailyTarget} {c.activityType === 'Steps' ? 'Steps' : c.activityType === 'WaterIntake' ? 'Glasses' : 'Mins'})</option>
-                ))}
+              <select 
+                className="form-select" 
+                value={selectedChallengeID} 
+                onChange={e => setSelectedChallengeID(Number(e.target.value))}
+                disabled={enrolledChallengeIds.length === 0}
+              >
+                {enrolledChallengeIds.length === 0 ? (
+                  <option value="">-- No Enrolled Challenges --</option>
+                ) : (
+                  challenges
+                    .filter(c => enrolledChallengeIds.includes(c.challengeID))
+                    .map(c => (
+                      <option key={c.challengeID} value={c.challengeID}>{c.challengeName} (Target: {c.dailyTarget} {c.activityType === 'Steps' ? 'Steps' : c.activityType === 'WaterIntake' ? 'Glasses' : 'Mins'})</option>
+                    ))
+                )}
               </select>
             </div>
 
             <div className="form-group">
               <label className="form-label">Logged Value</label>
-              <input className="form-input" type="number" value={newLogValue} onChange={e => setNewLogValue(Number(e.target.value))} required />
+              <input 
+                className="form-input" 
+                type="number" 
+                value={newLogValue} 
+                onChange={e => setNewLogValue(Number(e.target.value))} 
+                disabled={enrolledChallengeIds.length === 0} 
+                required 
+              />
             </div>
 
-            <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>Submit Progress Log</button>
+            <button 
+              type="submit" 
+              className="btn btn-primary" 
+              style={{ width: '100%' }}
+              disabled={enrolledChallengeIds.length === 0}
+            >
+              {enrolledChallengeIds.length === 0 ? 'Enrol in a Challenge First' : 'Submit Progress Log'}
+            </button>
           </form>
 
           <h4 style={{ fontWeight: 700, marginTop: 30, marginBottom: 12 }}>Wellness Challenges Catalog</h4>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12, maxHeight: '220px', overflowY: 'auto', paddingRight: '6px' }}>
-            {challenges.map(c => (
-              <div key={c.challengeID} style={{ padding: 16, border: '1px solid var(--glass-border)', borderRadius: 10, background: 'rgba(255,255,255,0.01)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div>
-                  <h5 style={{ fontWeight: 700 }}>{c.challengeName}</h5>
-                  <p style={{ fontSize: '0.8rem', color: 'hsl(var(--text-muted))' }}>Target: {c.dailyTarget} {c.activityType}</p>
+            {challenges.map(c => {
+              const isEnrolled = enrolledChallengeIds.includes(c.challengeID);
+              return (
+                <div key={c.challengeID} style={{ padding: 16, border: '1px solid var(--glass-border)', borderRadius: 10, background: 'rgba(255,255,255,0.01)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div>
+                    <h5 style={{ fontWeight: 700 }}>{c.challengeName}</h5>
+                    <p style={{ fontSize: '0.8rem', color: 'hsl(var(--text-muted))', margin: '4px 0 0 0' }}>
+                      Target: {c.dailyTarget} {c.activityType === 'Steps' ? 'Steps' : c.activityType === 'WaterIntake' ? 'Glasses' : 'Mins'} | <span style={{ color: '#10b981', fontWeight: 600 }}>+{c.pointsPerCompletion} pts</span>
+                    </p>
+                  </div>
+                  <div>
+                    {isEnrolled ? (
+                      <span style={{ fontSize: '0.85rem', color: '#10b981', fontWeight: 700 }}>
+                        ✓ Enrolled
+                      </span>
+                    ) : (
+                      <button 
+                        type="button" 
+                        className="btn btn-secondary" 
+                        style={{ padding: '6px 12px', fontSize: '0.8rem', fontWeight: 700, borderRadius: 8 }}
+                        onClick={() => handleEnrolChallenge(c.challengeID)}
+                      >
+                        Enrol
+                      </button>
+                    )}
+                  </div>
                 </div>
-                <span className="badge badge-success">+{c.pointsPerCompletion} Points</span>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 

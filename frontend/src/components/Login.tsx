@@ -485,51 +485,6 @@ export const Login: React.FC<LoginProps> = ({ handleLogin }) => {
           )}
         </div>
 
-        {/* Quick Demo Credentials */}
-        {view === 'login' && (
-          <div style={{ marginTop: 28, textAlign: 'center' }}>
-            <p style={{ fontSize: '0.82rem', color: '#64748b', marginBottom: 12, fontWeight: 700, letterSpacing: '0.5px', textTransform: 'uppercase' }}>⚡ Quick Demo Sign In</p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 8 }}>
-              {DEMO_USERS.map(du => (
-                <button
-                  key={du.role}
-                  disabled={isLoading}
-                  onClick={() => handleQuickLogin(du.email, du.password)}
-                  style={{
-                    padding: '10px 12px',
-                    borderRadius: 10,
-                    background: '#ffffff',
-                    border: '1px solid #e2e8f0',
-                    color: '#334155',
-                    fontSize: '0.78rem',
-                    fontWeight: 700,
-                    cursor: 'pointer',
-                    transition: 'all 0.2s',
-                    textAlign: 'left',
-                    whiteSpace: 'nowrap',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                    boxShadow: '0 2px 4px rgba(0,0,0,0.02)'
-                  }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.borderColor = '#00d09c';
-                    e.currentTarget.style.background = 'rgba(0,208,156,0.04)';
-                    e.currentTarget.style.color = '#00b587';
-                    e.currentTarget.style.boxShadow = '0 4px 8px rgba(0,208,156,0.08)';
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.borderColor = '#e2e8f0';
-                    e.currentTarget.style.background = '#ffffff';
-                    e.currentTarget.style.color = '#334155';
-                    e.currentTarget.style.boxShadow = '0 2px 4px rgba(0,0,0,0.02)';
-                  }}
-                >
-                  {du.name}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
 
       </div>
     </div>

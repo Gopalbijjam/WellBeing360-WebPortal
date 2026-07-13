@@ -1,9 +1,9 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellBeing360.Gateway", "WellBeing360.Gateway\WellBeing360.Gateway.csproj", "{931A1F6E-06A4-447B-A484-220E67322154}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellBeing360.ApiGateway", "WellBeing360.ApiGateway\WellBeing360.ApiGateway.csproj", "{931A1F6E-06A4-447B-A484-220E67322154}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WellBeing360.IdentityService", "WellBeing360.IdentityService\WellBeing360.IdentityService.csproj", "{AD761D08-8855-4276-B2F5-EA952E41CF6C}"
 EndProject

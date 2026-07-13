@@ -44,6 +44,16 @@ namespace WellBeing360.RewardsService.Services
                 _ => 50
             };
 
+            var nominatorPoints = await GetOrCreateMyPointsAsync(nominatorId);
+            if (nominatorPoints.Balance < points)
+            {
+                return (false, $"Insufficient points. You need {points} points to send this nomination, but only have {nominatorPoints.Balance} points.", null);
+            }
+
+            // Deduct points from nominator (donor)
+            nominatorPoints.Balance -= points;
+            nominatorPoints.LastUpdated = DateTime.UtcNow;
+
             var award = new RecognitionAward
             {
                 NominatorID = nominatorId,
@@ -57,8 +67,11 @@ namespace WellBeing360.RewardsService.Services
             };
 
             await _repository.AddAwardAsync(award);
+            
+            // Add points to recipient
             await AddPointsToEmployeeAsync(request.RecipientID, points);
 
+            // Notify recipient
             var notification = new Notification
             {
                 UserID = request.RecipientID,
@@ -68,6 +81,17 @@ namespace WellBeing360.RewardsService.Services
                 CreatedDate = DateTime.UtcNow
             };
             await _repository.AddNotificationAsync(notification);
+
+            // Notify nominator (donor)
+            var nominatorNotification = new Notification
+            {
+                UserID = nominatorId,
+                Message = $"You sent a '{request.BadgeName}' badge to employee {request.RecipientID} (-{points} points).",
+                Category = "Recognition",
+                Status = "Unread",
+                CreatedDate = DateTime.UtcNow
+            };
+            await _repository.AddNotificationAsync(nominatorNotification);
 
             await _repository.SaveChangesAsync();
 
