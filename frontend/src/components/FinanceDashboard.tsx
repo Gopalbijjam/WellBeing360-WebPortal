@@ -720,7 +720,7 @@ export const FinanceDashboard: React.FC<FinanceDashboardProps> = ({
                         <span style={{ color: 'hsl(var(--text-muted))' }}>Reward Points Spent:</span>
                         <span style={{ fontWeight: 700, display: 'flex', alignItems: 'center', gap: 6 }}>
                           <Coins size={14} style={{ color: 'hsl(var(--warning))' }} />
-                          {activeReport.metrics.PointsRedeemed.toLocaleString()} points
+                          {((activeReport?.metrics?.PointsRedeemed) ?? 0).toLocaleString()} points
                         </span>
                       </div>
                     </div>
