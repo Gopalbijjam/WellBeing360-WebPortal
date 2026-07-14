@@ -1,33 +1,33 @@
 import React, { useState } from 'react';
-import { ShieldCheck, Flame, CheckCircle, XCircle, X, Zap, Target, Trophy, LayoutGrid } from 'lucide-react';
-import type { WellnessProgram, WellnessChallenge, ActivityLog } from '../types';
+import { X, LayoutGrid, Target, Flame, Zap, ShieldCheck } from 'lucide-react';
+import type { WellnessProgram, WellnessChallenge, ActivityLog } from '../../types';
 
-interface WellnessCoordinatorConsoleProps {
+interface WellnessDashboardActionsProps {
   programs: WellnessProgram[];
   challenges: WellnessChallenge[];
   pendingLogs: ActivityLog[];
   createProgram: (prog: Partial<WellnessProgram>) => Promise<void>;
   createChallenge: (chal: Partial<WellnessChallenge>) => Promise<void>;
-  verifyLog: (id: number, approve: boolean) => Promise<void>;
 }
 
 type ModalType = 'program' | 'challenge' | null;
 
-export const WellnessCoordinatorConsole: React.FC<WellnessCoordinatorConsoleProps> = ({
+export const WellnessDashboardActions: React.FC<WellnessDashboardActionsProps> = ({
   programs,
   challenges,
   pendingLogs,
   createProgram,
-  createChallenge,
-  verifyLog
+  createChallenge
 }) => {
   const [activeModal, setActiveModal] = useState<ModalType>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Program Form State
   const [newProgName, setNewProgName] = useState('');
   const [newProgTheme, setNewProgTheme] = useState('Fitness');
   const [newProgPoints, setNewProgPoints] = useState(500);
 
+  // Challenge Form State
   const [newChalName, setNewChalName] = useState('');
   const [newChalType, setNewChalType] = useState('Steps');
   const [newChalTarget, setNewChalTarget] = useState(10000);
@@ -138,7 +138,6 @@ export const WellnessCoordinatorConsole: React.FC<WellnessCoordinatorConsoleProp
               animation: 'slideInUp 0.2s ease'
             }}
           >
-            {/* Modal header */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 28 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                 <div style={{ width: 40, height: 40, borderRadius: 12, background: 'rgba(0,208,156,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -262,153 +261,63 @@ export const WellnessCoordinatorConsole: React.FC<WellnessCoordinatorConsoleProp
         </div>
       )}
 
-      {/* ── Main Dashboard ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(480px, 1fr))', gap: 30 }}>
+      {/* Action Cards */}
+      <div className="glass-panel" style={{ background: '#ffffff', border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 10px 30px -10px rgba(0,0,0,0.04)' }}>
+        <h3 style={{ fontSize: '1.35rem', fontWeight: 800, marginBottom: 6, color: '#0f172a', display: 'flex', alignItems: 'center', gap: 8 }}>
+          <Flame size={20} style={{ color: '#00d09c' }} /> Wellness Management Console
+        </h3>
+        <p style={{ fontSize: '0.875rem', color: '#64748b', marginBottom: 28 }}>
+          Managing <strong>{programs.length}</strong> programs and <strong>{challenges.length}</strong> active challenges.
+        </p>
 
-        {/* Left Panel — Management Actions + Stats */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-
-          {/* Action Cards */}
-          <div className="glass-panel" style={{ background: '#ffffff', border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 10px 30px -10px rgba(0,0,0,0.04)' }}>
-            <h3 style={{ fontSize: '1.35rem', fontWeight: 800, marginBottom: 6, color: '#0f172a', display: 'flex', alignItems: 'center', gap: 8 }}>
-              <Flame size={20} style={{ color: '#00d09c' }} /> Wellness Management Console
-            </h3>
-            <p style={{ fontSize: '0.875rem', color: '#64748b', marginBottom: 28 }}>
-              Managing <strong>{programs.length}</strong> programs and <strong>{challenges.length}</strong> active challenges.
-            </p>
-
-            {/* Action Buttons */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 28 }}>
-              <button
-                onClick={() => setActiveModal('program')}
-                style={{
-                  padding: '20px 16px', borderRadius: 16, background: 'rgba(0,208,156,0.04)', border: '1.5px dashed rgba(0,208,156,0.25)',
-                  cursor: 'pointer', textAlign: 'left', transition: 'all 0.2s'
-                }}
-                onMouseOver={e => { e.currentTarget.style.background = 'rgba(0,208,156,0.08)'; e.currentTarget.style.borderColor = '#00d09c'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
-                onMouseOut={e => { e.currentTarget.style.background = 'rgba(0,208,156,0.04)'; e.currentTarget.style.borderColor = 'rgba(0,208,156,0.25)'; e.currentTarget.style.transform = 'translateY(0)'; }}
-              >
-                <div style={{ width: 36, height: 36, borderRadius: 10, background: 'rgba(0,208,156,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 12 }}>
-                  <LayoutGrid size={18} style={{ color: '#00b587' }} />
-                </div>
-                <div style={{ fontWeight: 800, fontSize: '0.95rem', color: '#0f172a', marginBottom: 4 }}>New Program</div>
-                <div style={{ fontSize: '0.78rem', color: '#64748b' }}>Create a wellness campaign</div>
-              </button>
-
-              <button
-                onClick={() => setActiveModal('challenge')}
-                style={{
-                  padding: '20px 16px', borderRadius: 16, background: 'rgba(59,130,246,0.04)', border: '1.5px dashed rgba(59,130,246,0.25)',
-                  cursor: 'pointer', textAlign: 'left', transition: 'all 0.2s'
-                }}
-                onMouseOver={e => { e.currentTarget.style.background = 'rgba(59,130,246,0.08)'; e.currentTarget.style.borderColor = '#3b82f6'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
-                onMouseOut={e => { e.currentTarget.style.background = 'rgba(59,130,246,0.04)'; e.currentTarget.style.borderColor = 'rgba(59,130,246,0.25)'; e.currentTarget.style.transform = 'translateY(0)'; }}
-              >
-                <div style={{ width: 36, height: 36, borderRadius: 10, background: 'rgba(59,130,246,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 12 }}>
-                  <Target size={18} style={{ color: '#3b82f6' }} />
-                </div>
-                <div style={{ fontWeight: 800, fontSize: '0.95rem', color: '#0f172a', marginBottom: 4 }}>New Challenge</div>
-                <div style={{ fontSize: '0.78rem', color: '#64748b' }}>Set up a new activity sprint</div>
-              </button>
+        {/* Action Buttons */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 28 }}>
+          <button
+            onClick={() => setActiveModal('program')}
+            style={{
+              padding: '20px 16px', borderRadius: 16, background: 'rgba(0,208,156,0.04)', border: '1.5px dashed rgba(0,208,156,0.25)',
+              cursor: 'pointer', textAlign: 'left', transition: 'all 0.2s'
+            }}
+            onMouseOver={e => { e.currentTarget.style.background = 'rgba(0,208,156,0.08)'; e.currentTarget.style.borderColor = '#00d09c'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
+            onMouseOut={e => { e.currentTarget.style.background = 'rgba(0,208,156,0.04)'; e.currentTarget.style.borderColor = 'rgba(0,208,156,0.25)'; e.currentTarget.style.transform = 'translateY(0)'; }}
+          >
+            <div style={{ width: 36, height: 36, borderRadius: 10, background: 'rgba(0,208,156,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 12 }}>
+              <LayoutGrid size={18} style={{ color: '#00b587' }} />
             </div>
+            <div style={{ fontWeight: 800, fontSize: '0.95rem', color: '#0f172a', marginBottom: 4 }}>New Program</div>
+            <div style={{ fontSize: '0.78rem', color: '#64748b' }}>Create a wellness campaign</div>
+          </button>
 
-            {/* Stats row */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
-              {[
-                { icon: <LayoutGrid size={16} />, label: 'Programs', value: programs.length, color: '#00d09c' },
-                { icon: <Zap size={16} />, label: 'Challenges', value: challenges.length, color: '#3b82f6' },
-                { icon: <ShieldCheck size={16} />, label: 'Pending', value: pendingLogs.length, color: pendingLogs.length > 0 ? '#f59e0b' : '#10b981' },
-              ].map((s) => (
-                <div key={s.label} style={{ padding: '14px 16px', borderRadius: 12, background: '#f8fafc', border: '1px solid #e2e8f0', textAlign: 'center' }}>
-                  <div style={{ color: s.color, display: 'flex', justifyContent: 'center', marginBottom: 6 }}>{s.icon}</div>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#0f172a', lineHeight: 1 }}>{s.value}</div>
-                  <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: 600, marginTop: 4 }}>{s.label}</div>
-                </div>
-              ))}
+          <button
+            onClick={() => setActiveModal('challenge')}
+            style={{
+              padding: '20px 16px', borderRadius: 16, background: 'rgba(59,130,246,0.04)', border: '1.5px dashed rgba(59,130,246,0.25)',
+              cursor: 'pointer', textAlign: 'left', transition: 'all 0.2s'
+            }}
+            onMouseOver={e => { e.currentTarget.style.background = 'rgba(59,130,246,0.08)'; e.currentTarget.style.borderColor = '#3b82f6'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
+            onMouseOut={e => { e.currentTarget.style.background = 'rgba(59,130,246,0.04)'; e.currentTarget.style.borderColor = 'rgba(59,130,246,0.25)'; e.currentTarget.style.transform = 'translateY(0)'; }}
+          >
+            <div style={{ width: 36, height: 36, borderRadius: 10, background: 'rgba(59,130,246,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 12 }}>
+              <Target size={18} style={{ color: '#3b82f6' }} />
             </div>
-          </div>
-
-          {/* Active Challenges List */}
-          <div className="glass-panel" style={{ background: '#ffffff', border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 10px 30px -10px rgba(0,0,0,0.04)' }}>
-            <h4 style={{ fontWeight: 800, fontSize: '1rem', marginBottom: 16, color: '#0f172a', display: 'flex', alignItems: 'center', gap: 6 }}>
-              <Trophy size={16} style={{ color: '#f59e0b' }} /> Active Challenges
-            </h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, maxHeight: '200px', overflowY: 'auto', paddingRight: 4 }}>
-              {challenges.length === 0 ? (
-                <p style={{ fontSize: '0.85rem', color: '#94a3b8', textAlign: 'center', padding: '16px 0' }}>No challenges launched yet.</p>
-              ) : challenges.map(c => (
-                <div key={c.challengeID} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 14px', border: '1px solid #e2e8f0', borderRadius: 10, background: '#f8fafc' }}>
-                  <div>
-                    <div style={{ fontWeight: 700, fontSize: '0.88rem', color: '#1e293b' }}>{c.challengeName}</div>
-                    <div style={{ fontSize: '0.75rem', color: '#64748b' }}>{c.activityType} · Target {c.dailyTarget}</div>
-                  </div>
-                  <span className="badge badge-primary">+{c.pointsPerCompletion} pts</span>
-                </div>
-              ))}
-            </div>
-          </div>
+            <div style={{ fontWeight: 800, fontSize: '0.95rem', color: '#0f172a', marginBottom: 4 }}>New Challenge</div>
+            <div style={{ fontSize: '0.78rem', color: '#64748b' }}>Set up a new activity sprint</div>
+          </button>
         </div>
 
-        {/* Right Panel — Verification Queue */}
-        <div className="glass-panel" style={{ background: '#ffffff', border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 10px 30px -10px rgba(0,0,0,0.04)' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
-            <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#0f172a', display: 'flex', alignItems: 'center', gap: 8, margin: 0 }}>
-              <ShieldCheck size={20} style={{ color: '#00d09c' }} /> Activity Verification Queue
-            </h3>
-            {pendingLogs.length > 0 && (
-              <span style={{ background: 'rgba(245,158,11,0.1)', color: '#d97706', border: '1px solid rgba(245,158,11,0.2)', borderRadius: 20, padding: '3px 10px', fontSize: '0.78rem', fontWeight: 700 }}>
-                {pendingLogs.length} pending
-              </span>
-            )}
-          </div>
-
-          {pendingLogs.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '60px 20px' }}>
-              <div style={{ width: 68, height: 68, borderRadius: '50%', background: 'rgba(16,185,129,0.06)', border: '1.5px solid rgba(16,185,129,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px' }}>
-                <CheckCircle size={30} style={{ color: '#10b981' }} />
-              </div>
-              <h4 style={{ fontWeight: 800, color: '#0f172a', marginBottom: 8 }}>All Verified!</h4>
-              <p style={{ fontSize: '0.88rem', color: '#64748b', maxWidth: 280, margin: '0 auto' }}>
-                No pending activity logs. All employee submissions have been reviewed.
-              </p>
+        {/* Stats row */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
+          {[
+            { icon: <LayoutGrid size={16} />, label: 'Programs', value: programs.length, color: '#00d09c' },
+            { icon: <Zap size={16} />, label: 'Challenges', value: challenges.length, color: '#3b82f6' },
+            { icon: <ShieldCheck size={16} />, label: 'Pending', value: pendingLogs.length, color: pendingLogs.length > 0 ? '#f59e0b' : '#10b981' },
+          ].map((s) => (
+            <div key={s.label} style={{ padding: '14px 16px', borderRadius: 12, background: '#f8fafc', border: '1px solid #e2e8f0', textAlign: 'center' }}>
+              <div style={{ color: s.color, display: 'flex', justifyContent: 'center', marginBottom: 6 }}>{s.icon}</div>
+              <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#0f172a', lineHeight: 1 }}>{s.value}</div>
+              <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: 600, marginTop: 4 }}>{s.label}</div>
             </div>
-          ) : (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 20, maxHeight: '520px', overflowY: 'auto', paddingRight: 4 }}>
-              {pendingLogs.map(l => (
-                <div key={l.logID} style={{ border: '1px solid var(--border)', borderRadius: 12, padding: 18, background: '#ffffff', display: 'flex', flexDirection: 'column', gap: 12, boxShadow: '0 4px 12px rgba(0,0,0,0.02)' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                    <div>
-                      <span style={{ fontSize: '0.72rem', fontWeight: 600, color: '#64748b', textTransform: 'uppercase' }}>Employee ID</span>
-                      <h5 style={{ fontWeight: 700, fontSize: '0.95rem', color: '#1e293b', marginTop: 2 }}>{l.employeeID}</h5>
-                    </div>
-                    <span className="badge badge-success" style={{ background: '#00b587', color: 'white', fontWeight: 700, borderRadius: 20, padding: '4px 10px', fontSize: '0.78rem' }}>
-                      +{l.pointsEarned} pts
-                    </span>
-                  </div>
-                  
-                  <div style={{ borderTop: '1px solid rgba(0,0,0,0.05)', paddingTop: 10, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-                    <div>
-                      <span style={{ color: '#64748b', display: 'block', fontSize: '0.72rem', fontWeight: 600 }}>Challenge</span>
-                      <span style={{ fontWeight: 600, color: '#334155', fontSize: '0.85rem' }}>Challenge #{l.challengeID}</span>
-                    </div>
-                    <div style={{ textAlign: 'right' }}>
-                      <span style={{ color: '#64748b', display: 'block', fontSize: '0.72rem', fontWeight: 600 }}>Activity Value</span>
-                      <span style={{ fontWeight: 700, color: '#0f172a', fontSize: '0.9rem' }}>{l.activityValue}</span>
-                    </div>
-                  </div>
-
-                  <div style={{ display: 'flex', gap: 10, marginTop: 4 }}>
-                    <button className="btn btn-success" style={{ flex: 1, padding: '8px 12px', fontSize: '0.85rem', height: 36, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 4, borderRadius: 8, fontWeight: 700 }} onClick={() => verifyLog(l.logID, true)}>
-                      <CheckCircle size={14} /> Approve
-                    </button>
-                    <button className="btn btn-danger" style={{ flex: 1, padding: '8px 12px', fontSize: '0.85rem', height: 36, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 4, borderRadius: 8, fontWeight: 700 }} onClick={() => verifyLog(l.logID, false)}>
-                      <XCircle size={14} /> Deny
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+          ))}
         </div>
       </div>
     </>

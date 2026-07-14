@@ -11,18 +11,18 @@ import type {
 import { authApi, benefitsApi, wellnessApi, rewardsApi, getDemoModeStatus } from './api';
 
 // Import refactored React components
-import { Login } from './components/Login';
+import { Login } from './pages/Login';
 import { Sidebar } from './components/Sidebar';
 import { Header } from './components/Header';
-import { EmployeePortal } from './components/EmployeePortal';
-import { HRBenefitsConsole } from './components/HRBenefitsConsole';
-import { WellnessCoordinatorConsole } from './components/WellnessCoordinatorConsole';
-import { RecognitionManagerConsole } from './components/RecognitionManagerConsole';
-import { FinanceDashboard } from './components/FinanceDashboard';
-import { AdminConsole } from './components/AdminConsole';
-import { EapBookingConsole } from './components/EapBookingConsole';
-import { ProfilePage } from './components/ProfilePage';
-import { AdminHomeDashboard } from './components/AdminHomeDashboard';
+import { EmployeePortal } from './pages/EmployeePortal';
+import { HRBenefitsConsole } from './pages/HRBenefitsConsole';
+import { WellnessCoordinatorConsole } from './pages/WellnessCoordinatorConsole';
+import { RecognitionManagerConsole } from './pages/RecognitionManagerConsole';
+import { FinanceDashboard } from './pages/FinanceDashboard';
+import { AdminConsole } from './pages/AdminConsole';
+import { EapBookingConsole } from './pages/EapBookingConsole';
+import { ProfilePage } from './pages/ProfilePage';
+import { AdminHomeDashboard } from './pages/AdminHomeDashboard';
 
 export default function App() {
   const [user, setUser] = useState<User | null>(null);

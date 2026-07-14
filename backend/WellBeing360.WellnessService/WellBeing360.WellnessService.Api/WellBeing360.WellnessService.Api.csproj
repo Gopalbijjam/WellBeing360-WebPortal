@@ -1,16 +1,17 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
-
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.3" />
   </ItemGroup>
-
+  <ItemGroup>
+    <ProjectReference Include="..\WellBeing360.WellnessService.Core\WellBeing360.WellnessService.Core.csproj" />
+    <ProjectReference Include="..\WellBeing360.WellnessService.Infrastructure\WellBeing360.WellnessService.Infrastructure.csproj" />
+    <ProjectReference Include="..\WellBeing360.WellnessService.Service\WellBeing360.WellnessService.Service.csproj" />
+  </ItemGroup>
 </Project>

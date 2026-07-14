@@ -13,22 +13,22 @@ if (Test-Path $localDotnet) {
 
 # 1. Start each C# Backend service in a new separate console window
 Write-Host "[1/6] Launching WellBeing360.IdentityService on Port 5001..." -ForegroundColor Yellow
-Start-Process powershell -ArgumentList "-NoExit", "-Command", "Write-Host 'Starting IdentityService...'; & $dotnetCmd run --project backend/WellBeing360.IdentityService/WellBeing360.IdentityService.csproj"
+Start-Process powershell -ArgumentList "-NoExit", "-Command", "Write-Host 'Starting IdentityService...'; & $dotnetCmd run --project backend/WellBeing360.IdentityService/WellBeing360.IdentityService.Api/WellBeing360.IdentityService.Api.csproj"
 
 Start-Sleep -Seconds 2
 
 Write-Host "[2/6] Launching WellBeing360.BenefitsService on Port 5002..." -ForegroundColor Yellow
-Start-Process powershell -ArgumentList "-NoExit", "-Command", "Write-Host 'Starting BenefitsService...'; & $dotnetCmd run --project backend/WellBeing360.BenefitsService/WellBeing360.BenefitsService.csproj"
+Start-Process powershell -ArgumentList "-NoExit", "-Command", "Write-Host 'Starting BenefitsService...'; & $dotnetCmd run --project backend/WellBeing360.BenefitsService/WellBeing360.BenefitsService.Api/WellBeing360.BenefitsService.Api.csproj"
 
 Start-Sleep -Seconds 2
 
 Write-Host "[3/6] Launching WellBeing360.WellnessService on Port 5003..." -ForegroundColor Yellow
-Start-Process powershell -ArgumentList "-NoExit", "-Command", "Write-Host 'Starting WellnessService...'; & $dotnetCmd run --project backend/WellBeing360.WellnessService/WellBeing360.WellnessService.csproj"
+Start-Process powershell -ArgumentList "-NoExit", "-Command", "Write-Host 'Starting WellnessService...'; & $dotnetCmd run --project backend/WellBeing360.WellnessService/WellBeing360.WellnessService.Api/WellBeing360.WellnessService.Api.csproj"
 
 Start-Sleep -Seconds 2
 
 Write-Host "[4/6] Launching WellBeing360.RewardsService on Port 5008..." -ForegroundColor Yellow
-Start-Process powershell -ArgumentList "-NoExit", "-Command", "Write-Host 'Starting RewardsService...'; & $dotnetCmd run --project backend/WellBeing360.RewardsService/WellBeing360.RewardsService.csproj"
+Start-Process powershell -ArgumentList "-NoExit", "-Command", "Write-Host 'Starting RewardsService...'; & $dotnetCmd run --project backend/WellBeing360.RewardsService/WellBeing360.RewardsService.Api/WellBeing360.RewardsService.Api.csproj"
 
 Start-Sleep -Seconds 2
 
