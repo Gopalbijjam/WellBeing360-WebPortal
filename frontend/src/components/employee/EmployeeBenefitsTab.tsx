@@ -117,7 +117,7 @@ export const EmployeeBenefitsTab: React.FC<EmployeeBenefitsTabProps> = ({
 
               <div className="form-group" style={{ marginBottom: 20 }}>
                 <label style={{ display: 'inline-flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontWeight: 700, color: '#475569', fontSize: '0.85rem' }}>
-                  <input type="checkbox" checked={includeDeps} onChange={e => setIncludeDeps(e.target.checked)} style={{ width: 16, height: 16, accentColor: '#00d09c' }} />
+                  <input type="checkbox" checked={includeDeps} onChange={e => setIncludeDeps(e.target.checked)} style={{ width: 16, height: 16, accentColor: '#6366f1' }} />
                   Include Dependents
                 </label>
               </div>
@@ -176,7 +176,7 @@ export const EmployeeBenefitsTab: React.FC<EmployeeBenefitsTabProps> = ({
                 <button type="button" className="btn btn-secondary" style={{ flex: 1, height: 44, borderRadius: 10, fontWeight: 700, border: '1px solid #cbd5e1', background: '#f8fafc' }} onClick={() => setIsEnrolModalOpen(false)}>
                   Cancel
                 </button>
-                <button type="submit" className="btn btn-primary" style={{ flex: 2, height: 44, borderRadius: 10, fontWeight: 700, background: 'linear-gradient(135deg, #00d09c, #00b587)' }}>
+                <button type="submit" className="btn btn-primary" style={{ flex: 2, height: 44, borderRadius: 10, fontWeight: 700, background: 'linear-gradient(135deg, #6366f1, #4f46e5)' }}>
                   Submit Enrolment
                 </button>
               </div>
@@ -251,7 +251,7 @@ export const EmployeeBenefitsTab: React.FC<EmployeeBenefitsTabProps> = ({
                 );
               })}
               {windows.some(w => w.status === 'Open') && (
-                <button className="btn btn-primary" style={{ marginTop: 10, background: 'linear-gradient(135deg, #00d09c, #00b587)', boxShadow: '0 4px 12px rgba(0, 208, 156, 0.2)' }} onClick={() => setIsEnrolModalOpen(true)}>
+                <button className="btn btn-primary" style={{ marginTop: 10, background: 'linear-gradient(135deg, #6366f1, #4f46e5)', boxShadow: '0 4px 12px rgba(99, 102, 241, 0.2)' }} onClick={() => setIsEnrolModalOpen(true)}>
                   Modify Coverage Option
                 </button>
               )}
@@ -268,7 +268,7 @@ export const EmployeeBenefitsTab: React.FC<EmployeeBenefitsTabProps> = ({
               {(() => {
                 const openWindow = windows.some(w => w.status === 'Open');
                 return openWindow ? (
-                  <button className="btn btn-primary" style={{ width: '100%', background: 'linear-gradient(135deg, #00d09c, #00b587)', boxShadow: '0 4px 12px rgba(0, 208, 156, 0.2)' }} onClick={() => setIsEnrolModalOpen(true)}>
+                  <button className="btn btn-primary" style={{ width: '100%', background: 'linear-gradient(135deg, #6366f1, #4f46e5)', boxShadow: '0 4px 12px rgba(99, 102, 241, 0.2)' }} onClick={() => setIsEnrolModalOpen(true)}>
                     Start Enrolment Wizard
                   </button>
                 ) : (

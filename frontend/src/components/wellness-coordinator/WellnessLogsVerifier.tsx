@@ -15,7 +15,7 @@ export const WellnessLogsVerifier: React.FC<WellnessLogsVerifierProps> = ({
     <div className="glass-panel" style={{ background: '#ffffff', border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 10px 30px -10px rgba(0,0,0,0.04)' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
         <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#0f172a', display: 'flex', alignItems: 'center', gap: 8, margin: 0 }}>
-          <ShieldCheck size={20} style={{ color: '#00d09c' }} /> Activity Verification Queue
+          <ShieldCheck size={20} style={{ color: '#6366f1' }} /> Activity Verification Queue
         </h3>
         {pendingLogs.length > 0 && (
           <span style={{ background: 'rgba(245,158,11,0.1)', color: '#d97706', border: '1px solid rgba(245,158,11,0.2)', borderRadius: 20, padding: '3px 10px', fontSize: '0.78rem', fontWeight: 700 }}>
@@ -43,7 +43,7 @@ export const WellnessLogsVerifier: React.FC<WellnessLogsVerifierProps> = ({
                   <span style={{ fontSize: '0.72rem', fontWeight: 600, color: '#64748b', textTransform: 'uppercase' }}>Employee ID</span>
                   <h5 style={{ fontWeight: 700, fontSize: '0.95rem', color: '#1e293b', marginTop: 2 }}>{l.employeeID}</h5>
                 </div>
-                <span className="badge badge-success" style={{ background: '#00b587', color: 'white', fontWeight: 700, borderRadius: 20, padding: '4px 10px', fontSize: '0.78rem' }}>
+                <span className="badge badge-success" style={{ background: '#4f46e5', color: 'white', fontWeight: 700, borderRadius: 20, padding: '4px 10px', fontSize: '0.78rem' }}>
                   +{l.pointsEarned} pts
                 </span>
               </div>

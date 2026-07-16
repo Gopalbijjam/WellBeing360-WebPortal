@@ -1,6 +1,6 @@
 import React from 'react';
-import { 
-  Heart, User as UserIcon, Shield, Activity, Calendar, Award, Gift, Settings, Database, Users, BarChart, LogOut 
+import {
+  Heart, User as UserIcon, Shield, Activity, Calendar, Award, Gift, Settings, Database, Users, BarChart, LogOut, Menu
 } from 'lucide-react';
 import type { User } from '../types';
 
@@ -9,21 +9,32 @@ interface SidebarProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
   handleLogout: () => void;
+  isOpen: boolean;
+  onToggle: () => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
   user,
   activeTab,
   setActiveTab,
-  handleLogout
+  handleLogout,
+  isOpen,
+  onToggle
 }) => {
   const getInitials = (name: string) => name.substring(0, 2).toUpperCase();
 
   return (
-    <aside className="sidebar">
-      <div style={{ height: 80, display: 'flex', alignItems: 'center', gap: 10, padding: '0 24px', borderBottom: '1px solid var(--glass-border)' }}>
-        <Heart size={24} style={{ color: 'hsl(var(--primary))' }} />
-        <h1 style={{ fontSize: '1.3rem', fontWeight: 800 }}>WellBeing360</h1>
+    <aside className={`sidebar ${isOpen ? '' : 'sidebar-closed'}`}>
+      <div style={{ height: 80, display: 'flex', alignItems: 'center', gap: 10, padding: '0 16px 0 24px', borderBottom: '1px solid var(--glass-border)' }}>
+        <Heart size={24} style={{ color: 'hsl(var(--primary))', flexShrink: 0 }} />
+        <h1 style={{ fontSize: '1.3rem', fontWeight: 800, flex: 1, whiteSpace: 'nowrap' }}>WellBeing360</h1>
+        <button
+          onClick={onToggle}
+          aria-label="Close sidebar"
+          style={{ background: 'transparent', border: 'none', cursor: 'pointer', padding: 6, borderRadius: 8, color: 'hsl(var(--text-muted))', display: 'flex', flexShrink: 0 }}
+        >
+          <Menu size={18} />
+        </button>
       </div>
 
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 6, padding: '24px 16px' }}>
@@ -113,14 +124,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             cursor: 'pointer',
             padding: '6px',
             borderRadius: '8px',
-            background: activeTab === 'profile' ? 'rgba(0,0,0,0.05)' : 'transparent',
-            transition: 'all 0.2s'
-          }}
-          onMouseOver={e => e.currentTarget.style.background = 'rgba(0,0,0,0.05)'}
-          onMouseOut={e => {
-            if (activeTab !== 'profile') {
-              e.currentTarget.style.background = 'transparent';
-            }
+            background: activeTab === 'profile' ? 'rgba(0,0,0,0.05)' : 'transparent'
           }}
         >
           <div style={{ width: 36, height: 36, borderRadius: '50%', background: 'hsl(var(--primary))', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', color: 'white' }}>

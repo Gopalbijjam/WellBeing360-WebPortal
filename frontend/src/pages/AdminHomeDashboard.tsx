@@ -81,7 +81,7 @@ export const AdminHomeDashboard: React.FC<AdminHomeDashboardProps> = ({
               <Shield size={24} />
             </div>
             <div>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'hsl(var(--text))' }}>Logged in as System Administrator</h3>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'hsl(var(--text-main))' }}>Logged in as System Administrator</h3>
               <p style={{ fontSize: '0.9rem', color: 'hsl(var(--text-muted))', marginTop: 4 }}>
                 You have global root access to audit logging database, active security tracking, and employee profile directories.
               </p>
@@ -184,7 +184,7 @@ export const AdminHomeDashboard: React.FC<AdminHomeDashboardProps> = ({
               <ShieldCheck size={24} />
             </div>
             <div>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'hsl(var(--text))' }}>Logged in as HR Benefits Administrator</h3>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'hsl(var(--text-main))' }}>Logged in as HR Benefits Administrator</h3>
               <p style={{ fontSize: '0.9rem', color: 'hsl(var(--text-muted))', marginTop: 4 }}>
                 Manage corporate insurance policies, configure flex benefit buckets, verify pending employee enrollments, and coordinate counseling sessions.
               </p>
@@ -331,7 +331,7 @@ export const AdminHomeDashboard: React.FC<AdminHomeDashboardProps> = ({
               <Activity size={24} />
             </div>
             <div>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'hsl(var(--text))' }}>Logged in as Wellness Program Coordinator</h3>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'hsl(var(--text-main))' }}>Logged in as Wellness Program Coordinator</h3>
               <p style={{ fontSize: '0.9rem', color: 'hsl(var(--text-muted))', marginTop: 4 }}>
                 Design active wellness programs and challenges (steps, meditation), audit employee submissions, and allocate reward points.
               </p>
@@ -386,9 +386,9 @@ export const AdminHomeDashboard: React.FC<AdminHomeDashboardProps> = ({
           {pendingLogs.length === 0 ? (
             <p style={{ color: 'hsl(var(--text-muted))' }}>No pending activity logs. Good job!</p>
           ) : (
-            <div className="table-wrapper">
+            <div className="table-wrapper" style={{ maxHeight: 320, overflowY: 'auto' }}>
               <table className="custom-table">
-                <thead>
+                <thead style={{ position: 'sticky', top: 0, zIndex: 1, background: 'var(--glass-bg)' }}>
                   <tr>
                     <th>Emp ID</th>
                     <th>Challenge ID</th>
@@ -398,7 +398,7 @@ export const AdminHomeDashboard: React.FC<AdminHomeDashboardProps> = ({
                   </tr>
                 </thead>
                 <tbody>
-                  {pendingLogs.slice(0, 5).map(log => (
+                  {pendingLogs.map(log => (
                     <tr key={log.logID}>
                       <td style={{ fontWeight: 700 }}>{log.employeeID}</td>
                       <td>Challenge #{log.challengeID}</td>
@@ -444,7 +444,7 @@ export const AdminHomeDashboard: React.FC<AdminHomeDashboardProps> = ({
               <Award size={24} />
             </div>
             <div>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'hsl(var(--text))' }}>Logged in as Recognition & Rewards Manager</h3>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'hsl(var(--text-main))' }}>Logged in as Recognition & Rewards Manager</h3>
               <p style={{ fontSize: '0.9rem', color: 'hsl(var(--text-muted))', marginTop: 4 }}>
                 Configure the rewards catalog inventory (gift cards, experience passes), track available stock levels, and audit peer-to-peer nomination distributions.
               </p>
@@ -575,7 +575,7 @@ export const AdminHomeDashboard: React.FC<AdminHomeDashboardProps> = ({
               <BarChart size={24} />
             </div>
             <div>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'hsl(var(--text))' }}>Logged in as Finance utilization analyst</h3>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'hsl(var(--text-main))' }}>Logged in as Finance utilization analyst</h3>
               <p style={{ fontSize: '0.9rem', color: 'hsl(var(--text-muted))', marginTop: 4 }}>
                 Audit claims ratios, generate dynamic financial utilization summaries, monitor wellbeing premium budgets, and track cost history.
               </p>
@@ -631,25 +631,25 @@ export const AdminHomeDashboard: React.FC<AdminHomeDashboardProps> = ({
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 20 }}>
               <div style={{ padding: 16, border: '1px solid var(--glass-border)', borderRadius: 10 }}>
                 <span style={{ fontSize: '0.8rem', color: 'hsl(var(--text-muted))' }}>Claims Submitted</span>
-                <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'hsl(var(--text))', marginTop: 4 }}>
+                <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'hsl(var(--text-main))', marginTop: 4 }}>
                   {latestReport.metrics.ClaimsSubmitted} claims
                 </div>
               </div>
               <div style={{ padding: 16, border: '1px solid var(--glass-border)', borderRadius: 10 }}>
                 <span style={{ fontSize: '0.8rem', color: 'hsl(var(--text-muted))' }}>Wellness Participation</span>
-                <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'hsl(var(--text))', marginTop: 4 }}>
+                <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'hsl(var(--text-main))', marginTop: 4 }}>
                   {latestReport.metrics.WellnessParticipation} users
                 </div>
               </div>
               <div style={{ padding: 16, border: '1px solid var(--glass-border)', borderRadius: 10 }}>
                 <span style={{ fontSize: '0.8rem', color: 'hsl(var(--text-muted))' }}>EAP Sessions Utilized</span>
-                <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'hsl(var(--text))', marginTop: 4 }}>
+                <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'hsl(var(--text-main))', marginTop: 4 }}>
                   {latestReport.metrics.EAPUtilisation} sessions
                 </div>
               </div>
               <div style={{ padding: 16, border: '1px solid var(--glass-border)', borderRadius: 10 }}>
                 <span style={{ fontSize: '0.8rem', color: 'hsl(var(--text-muted))' }}>Points Redeemed</span>
-                <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'hsl(var(--text))', marginTop: 4 }}>
+                <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'hsl(var(--text-main))', marginTop: 4 }}>
                   {latestReport.metrics.PointsRedeemed} pts
                 </div>
               </div>

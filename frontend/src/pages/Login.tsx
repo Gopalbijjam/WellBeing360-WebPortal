@@ -120,12 +120,12 @@ export const Login: React.FC<LoginProps> = ({ handleLogin }) => {
     height: '48px',
     borderRadius: '12px',
     background: '#ffffff',
-    border: focusedInput === id ? '1.5px solid #00d09c' : '1px solid #cbd5e1',
+    border: focusedInput === id ? '1.5px solid #6366f1' : '1px solid #cbd5e1',
     color: '#0f172a',
     fontFamily: 'inherit',
     fontSize: '0.95rem',
     outline: 'none',
-    boxShadow: focusedInput === id ? '0 0 0 4px rgba(0, 208, 156, 0.08)' : 'none',
+    boxShadow: focusedInput === id ? '0 0 0 4px rgba(99, 102, 241, 0.08)' : 'none',
     transition: 'all 0.2s ease-in-out'
   });
 
@@ -135,12 +135,12 @@ export const Login: React.FC<LoginProps> = ({ handleLogin }) => {
     padding: '0 40px 0 16px',
     borderRadius: '12px',
     background: '#ffffff',
-    border: focusedInput === id ? '1.5px solid #00d09c' : '1px solid #cbd5e1',
+    border: focusedInput === id ? '1.5px solid #6366f1' : '1px solid #cbd5e1',
     color: '#0f172a',
     fontFamily: 'inherit',
     fontSize: '0.92rem',
     outline: 'none',
-    boxShadow: focusedInput === id ? '0 0 0 4px rgba(0, 208, 156, 0.08)' : 'none',
+    boxShadow: focusedInput === id ? '0 0 0 4px rgba(99, 102, 241, 0.08)' : 'none',
     transition: 'all 0.2s ease-in-out',
     WebkitAppearance: 'none' as const,
     MozAppearance: 'none' as const,
@@ -152,7 +152,7 @@ export const Login: React.FC<LoginProps> = ({ handleLogin }) => {
   });
 
   // Premium Light Gray Gradient background to make cards pop
-  const pageBackground = 'radial-gradient(circle at top right, rgba(0, 208, 156, 0.12) 0%, transparent 60%), radial-gradient(circle at bottom left, rgba(59, 130, 246, 0.08) 0%, transparent 60%), #f8fafc';
+  const pageBackground = 'radial-gradient(circle at top right, rgba(99, 102, 241, 0.12) 0%, transparent 60%), radial-gradient(circle at bottom left, rgba(59, 130, 246, 0.08) 0%, transparent 60%), #f8fafc';
 
   if (view === 'landing') {
     return (
@@ -160,13 +160,13 @@ export const Login: React.FC<LoginProps> = ({ handleLogin }) => {
         <div style={{ maxWidth: 1100, margin: '0 auto', textAlign: 'center' }}>
           
           {/* Header Badge */}
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 16px', background: 'rgba(0, 208, 156, 0.05)', border: '1px solid rgba(0, 208, 156, 0.15)', borderRadius: 30, marginBottom: 32 }}>
-            <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#00b587', textTransform: 'uppercase', letterSpacing: '1px' }}>✨ Introducing Corporate Wellness Sprint</span>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 16px', background: 'rgba(99, 102, 241, 0.05)', border: '1px solid rgba(99, 102, 241, 0.15)', borderRadius: 30, marginBottom: 32 }}>
+            <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#4f46e5', textTransform: 'uppercase', letterSpacing: '1px' }}>✨ Introducing Corporate Wellness Sprint</span>
           </div>
 
           {/* Top Logo */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, marginBottom: 24 }}>
-            <div style={{ width: 44, height: 44, borderRadius: 12, background: 'linear-gradient(135deg, #00d09c, #3b82f6)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 8px 24px rgba(0, 208, 156, 0.15)' }}>
+            <div style={{ width: 44, height: 44, borderRadius: 12, background: 'linear-gradient(135deg, #6366f1, #3b82f6)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 8px 24px rgba(99, 102, 241, 0.15)' }}>
               <Heart size={22} color="#ffffff" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))' }} />
             </div>
             <span style={{ fontSize: '1.8rem', fontWeight: 800, letterSpacing: '-0.8px', color: '#0f172a' }}>WellBeing360</span>
@@ -175,7 +175,7 @@ export const Login: React.FC<LoginProps> = ({ handleLogin }) => {
           {/* Hero Title */}
           <h1 style={{ fontSize: '4.2rem', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-2px', marginBottom: 24, color: '#0f172a' }}>
             Elevate workspace <br />
-            <span style={{ background: 'linear-gradient(135deg, #00b587 30%, #3b82f6 90%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>wellness & benefits.</span>
+            <span style={{ background: 'linear-gradient(135deg, #4f46e5 30%, #3b82f6 90%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>wellness & benefits.</span>
           </h1>
 
           {/* Description */}
@@ -196,8 +196,8 @@ export const Login: React.FC<LoginProps> = ({ handleLogin }) => {
           {/* Feature Highlights Grid */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 24, textAlign: 'left', marginBottom: 72 }}>
             <div className="glass-panel" style={{ padding: 32, borderRadius: 20, background: '#ffffff', border: '1px solid rgba(0, 0, 0, 0.05)', boxShadow: '0 10px 30px -10px rgba(0, 0, 0, 0.04)', margin: 0 }}>
-              <div style={{ width: 44, height: 44, borderRadius: 12, background: 'rgba(0, 208, 156, 0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
-                <Shield size={22} style={{ color: '#00d09c' }} />
+              <div style={{ width: 44, height: 44, borderRadius: 12, background: 'rgba(99, 102, 241, 0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
+                <Shield size={22} style={{ color: '#6366f1' }} />
               </div>
               <h3 style={{ fontSize: '1.15rem', fontWeight: 700, marginBottom: 10, color: '#0f172a' }}>Flexible Benefits</h3>
               <p style={{ fontSize: '0.9rem', color: '#475569', lineHeight: 1.55 }}>Configure custom plans, manage eligibility windows, and add dependents instantly.</p>
@@ -212,8 +212,8 @@ export const Login: React.FC<LoginProps> = ({ handleLogin }) => {
             </div>
 
             <div className="glass-panel" style={{ padding: 32, borderRadius: 20, background: '#ffffff', border: '1px solid rgba(0, 0, 0, 0.05)', boxShadow: '0 10px 30px -10px rgba(0, 0, 0, 0.04)', margin: 0 }}>
-              <div style={{ width: 44, height: 44, borderRadius: 12, background: 'rgba(0, 208, 156, 0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
-                <Calendar size={22} style={{ color: '#00d09c' }} />
+              <div style={{ width: 44, height: 44, borderRadius: 12, background: 'rgba(99, 102, 241, 0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
+                <Calendar size={22} style={{ color: '#6366f1' }} />
               </div>
               <h3 style={{ fontSize: '1.15rem', fontWeight: 700, marginBottom: 10, color: '#0f172a' }}>Confidential EAP</h3>
               <p style={{ fontSize: '0.9rem', color: '#475569', lineHeight: 1.55 }}>Confidential booking of counselling sessions for professional mental health support.</p>
@@ -252,18 +252,7 @@ export const Login: React.FC<LoginProps> = ({ handleLogin }) => {
               borderRadius: '20px', 
               padding: '6px 14px', 
               cursor: 'pointer',
-              boxShadow: '0 2px 4px rgba(0,0,0,0.02)',
-              transition: 'all 0.2s'
-            }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.borderColor = '#00d09c';
-              e.currentTarget.style.color = '#00b587';
-              e.currentTarget.style.boxShadow = '0 4px 8px rgba(0,208,156,0.05)';
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.borderColor = '#e2e8f0';
-              e.currentTarget.style.color = '#475569';
-              e.currentTarget.style.boxShadow = '0 2px 4px rgba(0,0,0,0.02)';
+              boxShadow: '0 2px 4px rgba(0,0,0,0.02)'
             }}
           >
             <Home size={14} /> Back to Home
@@ -273,7 +262,7 @@ export const Login: React.FC<LoginProps> = ({ handleLogin }) => {
         {/* Logo and Switch Link */}
         <div style={{ textAlign: 'center', marginBottom: 28 }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, cursor: 'pointer', marginBottom: 16 }} onClick={() => setView('landing')}>
-            <div style={{ width: 38, height: 38, borderRadius: 10, background: 'linear-gradient(135deg, #00d09c, #3b82f6)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: 38, height: 38, borderRadius: 10, background: 'linear-gradient(135deg, #6366f1, #3b82f6)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Heart size={18} color="#ffffff" />
             </div>
             <span style={{ fontSize: '1.6rem', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.5px' }}>WellBeing360</span>
@@ -283,9 +272,9 @@ export const Login: React.FC<LoginProps> = ({ handleLogin }) => {
           </h2>
           <p style={{ fontSize: '0.95rem', color: '#475569', marginTop: 8 }}>
             {view === 'login' ? (
-              <span>New to WellBeing360? <button className="link-btn" style={{ color: '#00b587', background: 'none', border: 'none', cursor: 'pointer', padding: 0, font: 'inherit', textDecoration: 'underline', fontWeight: 700 }} onClick={() => setView('register')}>Create an account</button></span>
+              <span>New to WellBeing360? <button className="link-btn" style={{ color: '#4f46e5', background: 'none', border: 'none', cursor: 'pointer', padding: 0, font: 'inherit', textDecoration: 'underline', fontWeight: 700 }} onClick={() => setView('register')}>Create an account</button></span>
             ) : (
-              <span>Already registered? <button className="link-btn" style={{ color: '#00b587', background: 'none', border: 'none', cursor: 'pointer', padding: 0, font: 'inherit', textDecoration: 'underline', fontWeight: 700 }} onClick={() => setView('login')}>Log in here</button></span>
+              <span>Already registered? <button className="link-btn" style={{ color: '#4f46e5', background: 'none', border: 'none', cursor: 'pointer', padding: 0, font: 'inherit', textDecoration: 'underline', fontWeight: 700 }} onClick={() => setView('login')}>Log in here</button></span>
             )}
           </p>
         </div>
@@ -341,7 +330,7 @@ export const Login: React.FC<LoginProps> = ({ handleLogin }) => {
                 </div>
               </div>
 
-              <button type="submit" disabled={isLoading} className="btn btn-primary" style={{ width: '100%', height: 48, fontSize: '1rem', fontWeight: 700, borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, background: 'linear-gradient(135deg, #00d09c, #00b587)', boxShadow: '0 4px 12px rgba(0, 208, 156, 0.2)' }}>
+              <button type="submit" disabled={isLoading} className="btn btn-primary" style={{ width: '100%', height: 48, fontSize: '1rem', fontWeight: 700, borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, background: 'linear-gradient(135deg, #6366f1, #4f46e5)', boxShadow: '0 4px 12px rgba(99, 102, 241, 0.2)' }}>
                 <LogIn size={18} /> {isLoading ? 'Authenticating...' : 'Sign In'}
               </button>
 
@@ -365,22 +354,11 @@ export const Login: React.FC<LoginProps> = ({ handleLogin }) => {
                         border: '1px solid #e2e8f0',
                         borderRadius: '8px',
                         cursor: 'pointer',
-                        transition: 'all 0.2s',
                         color: '#334155',
                         display: 'block',
                         whiteSpace: 'nowrap',
                         overflow: 'hidden',
                         textOverflow: 'ellipsis'
-                      }}
-                      onMouseOver={(e) => {
-                        e.currentTarget.style.background = 'rgba(0, 208, 156, 0.05)';
-                        e.currentTarget.style.borderColor = '#00d09c';
-                        e.currentTarget.style.color = '#00b587';
-                      }}
-                      onMouseOut={(e) => {
-                        e.currentTarget.style.background = '#f8fafc';
-                        e.currentTarget.style.borderColor = '#e2e8f0';
-                        e.currentTarget.style.color = '#334155';
                       }}
                     >
                       {demo.name}
@@ -522,7 +500,7 @@ export const Login: React.FC<LoginProps> = ({ handleLogin }) => {
                 </select>
               </div>
 
-              <button type="submit" disabled={isLoading} className="btn btn-primary" style={{ width: '100%', height: 46, fontSize: '1rem', fontWeight: 700, borderRadius: 12, background: 'linear-gradient(135deg, #00d09c, #00b587)', boxShadow: '0 4px 12px rgba(0, 208, 156, 0.2)' }}>
+              <button type="submit" disabled={isLoading} className="btn btn-primary" style={{ width: '100%', height: 46, fontSize: '1rem', fontWeight: 700, borderRadius: 12, background: 'linear-gradient(135deg, #6366f1, #4f46e5)', boxShadow: '0 4px 12px rgba(99, 102, 241, 0.2)' }}>
                 {isLoading ? 'Creating profile...' : 'Register Account'}
               </button>
             </form>

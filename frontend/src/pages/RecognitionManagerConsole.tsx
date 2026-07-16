@@ -45,12 +45,12 @@ export const RecognitionManagerConsole: React.FC<RecognitionManagerConsoleProps>
     height: '42px',
     borderRadius: '10px',
     background: '#ffffff',
-    border: focusedInput === id ? '1.5px solid #00d09c' : '1px solid #cbd5e1',
+    border: focusedInput === id ? '1.5px solid #6366f1' : '1px solid #cbd5e1',
     color: '#0f172a',
     fontFamily: 'inherit',
     fontSize: '0.9rem',
     outline: 'none',
-    boxShadow: focusedInput === id ? '0 0 0 3px rgba(0, 208, 156, 0.08)' : 'none',
+    boxShadow: focusedInput === id ? '0 0 0 3px rgba(99, 102, 241, 0.08)' : 'none',
     transition: 'all 0.15s ease-in-out'
   });
 
@@ -60,12 +60,12 @@ export const RecognitionManagerConsole: React.FC<RecognitionManagerConsoleProps>
     padding: '0 40px 0 14px',
     borderRadius: '10px',
     background: '#ffffff',
-    border: focusedInput === id ? '1.5px solid #00d09c' : '1px solid #cbd5e1',
+    border: focusedInput === id ? '1.5px solid #6366f1' : '1px solid #cbd5e1',
     color: '#0f172a',
     fontFamily: 'inherit',
     fontSize: '0.9rem',
     outline: 'none',
-    boxShadow: focusedInput === id ? '0 0 0 3px rgba(0, 208, 156, 0.08)' : 'none',
+    boxShadow: focusedInput === id ? '0 0 0 3px rgba(99, 102, 241, 0.08)' : 'none',
     transition: 'all 0.15s ease-in-out',
     WebkitAppearance: 'none' as const,
     MozAppearance: 'none' as const,
@@ -106,8 +106,8 @@ export const RecognitionManagerConsole: React.FC<RecognitionManagerConsoleProps>
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                <div style={{ width: 40, height: 40, borderRadius: 12, background: 'rgba(0,208,156,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <Gift size={20} style={{ color: '#00d09c' }} />
+                <div style={{ width: 40, height: 40, borderRadius: 12, background: 'rgba(99,102,241,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Gift size={20} style={{ color: '#6366f1' }} />
                 </div>
                 <div>
                   <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#0f172a', margin: 0 }}>Configure Catalog Item</h3>
@@ -147,7 +147,7 @@ export const RecognitionManagerConsole: React.FC<RecognitionManagerConsoleProps>
                 <button type="button" className="btn btn-secondary" style={{ flex: 1, height: 44, borderRadius: 10, fontWeight: 700, border: '1px solid #cbd5e1', background: '#f8fafc' }} onClick={() => setIsModalOpen(false)}>
                   Cancel
                 </button>
-                <button type="submit" disabled={isSubmitting} className="btn btn-primary" style={{ flex: 2, height: 44, borderRadius: 10, fontWeight: 700, background: 'linear-gradient(135deg, #00d09c, #00b587)' }}>
+                <button type="submit" disabled={isSubmitting} className="btn btn-primary" style={{ flex: 2, height: 44, borderRadius: 10, fontWeight: 700, background: 'linear-gradient(135deg, #6366f1, #4f46e5)' }}>
                   {isSubmitting ? 'Adding...' : 'Add Item to Catalog'}
                 </button>
               </div>
@@ -160,7 +160,7 @@ export const RecognitionManagerConsole: React.FC<RecognitionManagerConsoleProps>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
         <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#0f172a', marginBottom: 4 }}>Redemption Store Catalog Console</h3>
         <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-          <button className="btn btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'linear-gradient(135deg, #00d09c, #00b587)', boxShadow: '0 4px 12px rgba(0, 208, 156, 0.15)', borderRadius: 10, fontWeight: 700 }} onClick={() => setIsModalOpen(true)}>
+          <button className="btn btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'linear-gradient(135deg, #6366f1, #4f46e5)', boxShadow: '0 4px 12px rgba(99, 102, 241, 0.15)', borderRadius: 10, fontWeight: 700 }} onClick={() => setIsModalOpen(true)}>
             <PlusCircle size={16} /> Add Redemption Catalog Item
           </button>
         </div>

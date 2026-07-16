@@ -1,5 +1,5 @@
 import React from 'react';
-import { Bell, Star } from 'lucide-react';
+import { Bell, Star, Menu } from 'lucide-react';
 import type { User, RewardPoints, Notification } from '../types';
 
 interface HeaderProps {
@@ -10,6 +10,8 @@ interface HeaderProps {
   showNotifications: boolean;
   setShowNotifications: (show: boolean) => void;
   handleMarkNotificationRead: (id: number) => void;
+  isSidebarOpen: boolean;
+  onOpenSidebar: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -19,13 +21,25 @@ export const Header: React.FC<HeaderProps> = ({
   notifications,
   showNotifications,
   setShowNotifications,
-  handleMarkNotificationRead
+  handleMarkNotificationRead,
+  isSidebarOpen,
+  onOpenSidebar
 }) => {
   const unreadCount = notifications.filter(n => n.status === 'Unread').length;
 
   return (
     <header className="header">
       <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        {!isSidebarOpen && (
+          <button
+            onClick={onOpenSidebar}
+            aria-label="Open sidebar"
+            className="btn btn-secondary"
+            style={{ padding: 10, borderRadius: 10 }}
+          >
+            <Menu size={18} />
+          </button>
+        )}
         <h2 style={{ fontSize: '1.25rem', fontWeight: 800 }}>Welcome to WellBeing360</h2>
         {isDemo && (
           <span className="badge badge-warning">Demo Mode (Offline Fallback)</span>
@@ -50,8 +64,8 @@ export const Header: React.FC<HeaderProps> = ({
               ) : (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                   {notifications.map(n => (
-                    <div key={n.notificationID} style={{ padding: 8, background: n.status === 'Unread' ? 'rgba(255,255,255,0.03)' : 'transparent', borderBottom: '1px solid rgba(255,255,255,0.02)', cursor: 'pointer' }} onClick={() => handleMarkNotificationRead(n.notificationID)}>
-                      <p style={{ fontSize: '0.85rem', color: n.status === 'Unread' ? 'white' : 'hsl(var(--text-muted))' }}>{n.message}</p>
+                    <div key={n.notificationID} style={{ padding: 8, background: n.status === 'Unread' ? 'hsla(var(--primary)/0.08)' : 'transparent', borderBottom: '1px solid var(--glass-border)', cursor: 'pointer' }} onClick={() => handleMarkNotificationRead(n.notificationID)}>
+                      <p style={{ fontSize: '0.85rem', fontWeight: n.status === 'Unread' ? 700 : 400, color: n.status === 'Unread' ? 'hsl(var(--text-main))' : 'hsl(var(--text-muted))' }}>{n.message}</p>
                       <span style={{ fontSize: '0.7rem', color: 'hsl(var(--text-muted))' }}>{new Date(n.createdDate).toLocaleDateString()}</span>
                     </div>
                   ))}

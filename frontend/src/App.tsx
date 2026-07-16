@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { 
+import {
   AlertCircle, CheckCircle
 } from 'lucide-react';
 
@@ -31,6 +31,7 @@ export default function App() {
 
   // App UI state
   const [activeTab, setActiveTab] = useState<string>('home');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [showNotifications, setShowNotifications] = useState(false);
   const [points, setPoints] = useState<RewardPoints | null>(null);
@@ -533,6 +534,8 @@ export default function App() {
             usersList={usersList}
             auditLogs={auditLogs}
             onToggleUserStatus={handleToggleUserStatus}
+            activeAdminViewTab={activeTab === 'audit' ? 'audit' : 'users'}
+            onAdminViewTabChange={setActiveTab}
           />
         );
       default:
@@ -547,15 +550,17 @@ export default function App() {
 
   return (
     <div className="app-container">
-      <Sidebar 
-        user={user} 
-        activeTab={activeTab} 
-        setActiveTab={setActiveTab} 
-        handleLogout={handleLogout} 
+      <Sidebar
+        user={user}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        handleLogout={handleLogout}
+        isOpen={isSidebarOpen}
+        onToggle={() => setIsSidebarOpen(o => !o)}
       />
 
       <main className="main-content">
-        <Header 
+        <Header
           user={user}
           isDemo={isDemo}
           points={points}
@@ -563,6 +568,8 @@ export default function App() {
           showNotifications={showNotifications}
           setShowNotifications={setShowNotifications}
           handleMarkNotificationRead={handleMarkNotificationRead}
+          isSidebarOpen={isSidebarOpen}
+          onOpenSidebar={() => setIsSidebarOpen(true)}
         />
 
         <div className="content-body">

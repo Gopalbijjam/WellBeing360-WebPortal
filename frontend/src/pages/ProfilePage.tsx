@@ -12,8 +12,8 @@ interface ProfilePageProps {
 const ROLE_META: Record<string, { label: string; color: string; bg: string; description: string }> = {
   Employee: {
     label: 'Employee',
-    color: '#00b587',
-    bg: 'rgba(0,208,156,0.08)',
+    color: '#4f46e5',
+    bg: 'rgba(99,102,241,0.08)',
     description: 'Access to benefits enrollment, wellness challenges, EAP booking, recognition, and rewards redemption.'
   },
   HRBenefitsAdmin: {
@@ -162,12 +162,12 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ user, points }) => {
         {/* Contact Information */}
         <div style={{ padding: 32, borderRadius: 20, background: '#ffffff', border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 8px 24px -8px rgba(0,0,0,0.04)' }}>
           <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#0f172a', marginBottom: 24, display: 'flex', alignItems: 'center', gap: 8 }}>
-            <UserIcon size={18} style={{ color: '#00d09c' }} /> Contact Information
+            <UserIcon size={18} style={{ color: '#6366f1' }} /> Contact Information
           </h3>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-              <div style={{ width: 40, height: 40, borderRadius: 10, background: 'rgba(0,208,156,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Mail size={18} style={{ color: '#00d09c' }} />
+              <div style={{ width: 40, height: 40, borderRadius: 10, background: 'rgba(99,102,241,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Mail size={18} style={{ color: '#6366f1' }} />
               </div>
               <div>
                 <div style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Email Address</div>

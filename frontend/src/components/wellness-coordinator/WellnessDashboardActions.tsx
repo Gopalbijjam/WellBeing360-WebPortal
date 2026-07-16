@@ -89,12 +89,12 @@ export const WellnessDashboardActions: React.FC<WellnessDashboardActionsProps> =
     height: '44px',
     borderRadius: '10px',
     background: '#ffffff',
-    border: focusedInput === id ? '1.5px solid #00d09c' : '1px solid #cbd5e1',
+    border: focusedInput === id ? '1.5px solid #6366f1' : '1px solid #cbd5e1',
     color: '#0f172a',
     fontFamily: 'inherit',
     fontSize: '0.92rem',
     outline: 'none',
-    boxShadow: focusedInput === id ? '0 0 0 3px rgba(0,208,156,0.1)' : 'none',
+    boxShadow: focusedInput === id ? '0 0 0 3px rgba(99,102,241,0.1)' : 'none',
     transition: 'all 0.15s ease-in-out'
   });
 
@@ -140,8 +140,8 @@ export const WellnessDashboardActions: React.FC<WellnessDashboardActionsProps> =
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 28 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                <div style={{ width: 40, height: 40, borderRadius: 12, background: 'rgba(0,208,156,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  {activeModal === 'program' ? <LayoutGrid size={20} style={{ color: '#00d09c' }} /> : <Target size={20} style={{ color: '#00d09c' }} />}
+                <div style={{ width: 40, height: 40, borderRadius: 12, background: 'rgba(99,102,241,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  {activeModal === 'program' ? <LayoutGrid size={20} style={{ color: '#6366f1' }} /> : <Target size={20} style={{ color: '#6366f1' }} />}
                 </div>
                 <div>
                   <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#0f172a', margin: 0 }}>
@@ -188,7 +188,7 @@ export const WellnessDashboardActions: React.FC<WellnessDashboardActionsProps> =
                   <button type="button" onClick={closeModal} className="btn btn-secondary" style={{ flex: 1, height: 44, borderRadius: 10, fontWeight: 700, border: '1px solid #cbd5e1', background: '#f8fafc' }}>
                     Cancel
                   </button>
-                  <button type="submit" disabled={isSubmitting} className="btn btn-primary" style={{ flex: 2, height: 44, borderRadius: 10, fontWeight: 700, background: 'linear-gradient(135deg, #00d09c, #00b587)', boxShadow: '0 4px 12px rgba(0,208,156,0.2)' }}>
+                  <button type="submit" disabled={isSubmitting} className="btn btn-primary" style={{ flex: 2, height: 44, borderRadius: 10, fontWeight: 700, background: 'linear-gradient(135deg, #6366f1, #4f46e5)', boxShadow: '0 4px 12px rgba(99,102,241,0.2)' }}>
                     {isSubmitting ? 'Launching...' : '🚀 Launch Program'}
                   </button>
                 </div>
@@ -251,7 +251,7 @@ export const WellnessDashboardActions: React.FC<WellnessDashboardActionsProps> =
                   <button type="button" onClick={closeModal} className="btn btn-secondary" style={{ flex: 1, height: 44, borderRadius: 10, fontWeight: 700, border: '1px solid #cbd5e1', background: '#f8fafc' }}>
                     Cancel
                   </button>
-                  <button type="submit" disabled={isSubmitting} className="btn btn-primary" style={{ flex: 2, height: 44, borderRadius: 10, fontWeight: 700, background: 'linear-gradient(135deg, #00d09c, #00b587)', boxShadow: '0 4px 12px rgba(0,208,156,0.2)' }}>
+                  <button type="submit" disabled={isSubmitting} className="btn btn-primary" style={{ flex: 2, height: 44, borderRadius: 10, fontWeight: 700, background: 'linear-gradient(135deg, #6366f1, #4f46e5)', boxShadow: '0 4px 12px rgba(99,102,241,0.2)' }}>
                     {isSubmitting ? 'Creating...' : '🏆 Launch Challenge'}
                   </button>
                 </div>
@@ -264,7 +264,7 @@ export const WellnessDashboardActions: React.FC<WellnessDashboardActionsProps> =
       {/* Action Cards */}
       <div className="glass-panel" style={{ background: '#ffffff', border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 10px 30px -10px rgba(0,0,0,0.04)' }}>
         <h3 style={{ fontSize: '1.35rem', fontWeight: 800, marginBottom: 6, color: '#0f172a', display: 'flex', alignItems: 'center', gap: 8 }}>
-          <Flame size={20} style={{ color: '#00d09c' }} /> Wellness Management Console
+          <Flame size={20} style={{ color: '#6366f1' }} /> Wellness Management Console
         </h3>
         <p style={{ fontSize: '0.875rem', color: '#64748b', marginBottom: 28 }}>
           Managing <strong>{programs.length}</strong> programs and <strong>{challenges.length}</strong> active challenges.
@@ -275,14 +275,12 @@ export const WellnessDashboardActions: React.FC<WellnessDashboardActionsProps> =
           <button
             onClick={() => setActiveModal('program')}
             style={{
-              padding: '20px 16px', borderRadius: 16, background: 'rgba(0,208,156,0.04)', border: '1.5px dashed rgba(0,208,156,0.25)',
-              cursor: 'pointer', textAlign: 'left', transition: 'all 0.2s'
+              padding: '20px 16px', borderRadius: 16, background: 'rgba(99,102,241,0.04)', border: '1.5px dashed rgba(99,102,241,0.25)',
+              cursor: 'pointer', textAlign: 'left'
             }}
-            onMouseOver={e => { e.currentTarget.style.background = 'rgba(0,208,156,0.08)'; e.currentTarget.style.borderColor = '#00d09c'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
-            onMouseOut={e => { e.currentTarget.style.background = 'rgba(0,208,156,0.04)'; e.currentTarget.style.borderColor = 'rgba(0,208,156,0.25)'; e.currentTarget.style.transform = 'translateY(0)'; }}
           >
-            <div style={{ width: 36, height: 36, borderRadius: 10, background: 'rgba(0,208,156,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 12 }}>
-              <LayoutGrid size={18} style={{ color: '#00b587' }} />
+            <div style={{ width: 36, height: 36, borderRadius: 10, background: 'rgba(99,102,241,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 12 }}>
+              <LayoutGrid size={18} style={{ color: '#4f46e5' }} />
             </div>
             <div style={{ fontWeight: 800, fontSize: '0.95rem', color: '#0f172a', marginBottom: 4 }}>New Program</div>
             <div style={{ fontSize: '0.78rem', color: '#64748b' }}>Create a wellness campaign</div>
@@ -292,10 +290,8 @@ export const WellnessDashboardActions: React.FC<WellnessDashboardActionsProps> =
             onClick={() => setActiveModal('challenge')}
             style={{
               padding: '20px 16px', borderRadius: 16, background: 'rgba(59,130,246,0.04)', border: '1.5px dashed rgba(59,130,246,0.25)',
-              cursor: 'pointer', textAlign: 'left', transition: 'all 0.2s'
+              cursor: 'pointer', textAlign: 'left'
             }}
-            onMouseOver={e => { e.currentTarget.style.background = 'rgba(59,130,246,0.08)'; e.currentTarget.style.borderColor = '#3b82f6'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
-            onMouseOut={e => { e.currentTarget.style.background = 'rgba(59,130,246,0.04)'; e.currentTarget.style.borderColor = 'rgba(59,130,246,0.25)'; e.currentTarget.style.transform = 'translateY(0)'; }}
           >
             <div style={{ width: 36, height: 36, borderRadius: 10, background: 'rgba(59,130,246,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 12 }}>
               <Target size={18} style={{ color: '#3b82f6' }} />
@@ -308,7 +304,7 @@ export const WellnessDashboardActions: React.FC<WellnessDashboardActionsProps> =
         {/* Stats row */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
           {[
-            { icon: <LayoutGrid size={16} />, label: 'Programs', value: programs.length, color: '#00d09c' },
+            { icon: <LayoutGrid size={16} />, label: 'Programs', value: programs.length, color: '#6366f1' },
             { icon: <Zap size={16} />, label: 'Challenges', value: challenges.length, color: '#3b82f6' },
             { icon: <ShieldCheck size={16} />, label: 'Pending', value: pendingLogs.length, color: pendingLogs.length > 0 ? '#f59e0b' : '#10b981' },
           ].map((s) => (

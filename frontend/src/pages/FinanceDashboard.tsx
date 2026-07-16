@@ -65,14 +65,8 @@ export const FinanceDashboard: React.FC<FinanceDashboardProps> = ({
           display: flex;
           flex-direction: column;
           gap: 12px;
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .metric-card-custom:hover {
-          transform: translateY(-4px);
-          box-shadow: 0 10px 25px var(--glass-shadow);
-          border-color: hsla(var(--primary) / 0.3);
-        }
-        
+
         .history-row-active {
           background: hsla(var(--primary) / 0.08) !important;
           border-left: 4px solid hsl(var(--primary)) !important;
@@ -81,12 +75,8 @@ export const FinanceDashboard: React.FC<FinanceDashboardProps> = ({
         
         .history-row-clickable {
           cursor: pointer;
-          transition: background-color 0.2s ease;
         }
-        .history-row-clickable:hover {
-          background: rgba(0,0,0,0.02) !important;
-        }
-        
+
         .dashboard-split-layout {
           display: grid;
           grid-template-columns: 1fr 360px;

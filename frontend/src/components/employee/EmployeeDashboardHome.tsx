@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heart, Activity, Calendar, Award, Star, Plus } from 'lucide-react';
+import { Heart, Activity, Calendar, Award, Star, Plus, ChevronRight } from 'lucide-react';
 import type { User, RewardPoints, BenefitEnrolment, ActivityLog, EAPSession } from '../../types';
 
 interface EmployeeDashboardHomeProps {
@@ -71,19 +71,29 @@ export const EmployeeDashboardHome: React.FC<EmployeeDashboardHomeProps> = ({
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(450px, 1fr))', gap: 30 }}>
         <div className="glass-panel" style={{ height: 'fit-content' }}>
           <h3 style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: 16 }}>Quick Actions</h3>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            <button className="btn btn-primary" onClick={() => setActiveTab('enrolment')}>
-              <Plus size={16} /> Enrol in a Benefit Plan
-            </button>
-            <button className="btn btn-secondary" onClick={() => setActiveTab('wellness')}>
-              <Activity size={16} /> Log Wellness Activity
-            </button>
-            <button className="btn btn-secondary" onClick={() => setActiveTab('eap')}>
-              <Calendar size={16} /> Book EAP Counselling Session
-            </button>
-            <button className="btn btn-secondary" onClick={() => setActiveTab('recognition')}>
-              <Award size={16} /> Nominate a Colleague
-            </button>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            {[
+              { icon: <Plus size={18} />, label: 'Enrol in a Benefit Plan', tab: 'enrolment' },
+              { icon: <Activity size={18} />, label: 'Log Wellness Activity', tab: 'wellness' },
+              { icon: <Calendar size={18} />, label: 'Book EAP Counselling Session', tab: 'eap' },
+              { icon: <Award size={18} />, label: 'Nominate a Colleague', tab: 'recognition' }
+            ].map(action => (
+              <button
+                key={action.tab}
+                onClick={() => setActiveTab(action.tab)}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 14, width: '100%', textAlign: 'left',
+                  padding: '12px 14px', borderRadius: 12, border: '1px solid var(--border)',
+                  background: 'hsl(var(--bg-card))', cursor: 'pointer'
+                }}
+              >
+                <div style={{ width: 36, height: 36, borderRadius: 10, background: 'hsla(var(--primary) / 0.12)', color: 'hsl(var(--primary))', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  {action.icon}
+                </div>
+                <span style={{ fontWeight: 700, fontSize: '0.92rem', color: 'hsl(var(--text-main))', flex: 1 }}>{action.label}</span>
+                <ChevronRight size={16} style={{ color: 'hsl(var(--text-muted))', flexShrink: 0 }} />
+              </button>
+            ))}
           </div>
         </div>
 

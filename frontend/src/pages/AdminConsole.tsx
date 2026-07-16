@@ -5,14 +5,17 @@ interface AdminConsoleProps {
   usersList: User[];
   auditLogs: AuditLog[];
   onToggleUserStatus: (userId: number, newStatus: 'Active' | 'Inactive') => Promise<void>;
+  activeAdminViewTab: 'users' | 'audit';
+  onAdminViewTabChange: (tab: 'users' | 'audit') => void;
 }
 
 export const AdminConsole: React.FC<AdminConsoleProps> = ({
   usersList,
   auditLogs,
-  onToggleUserStatus
+  onToggleUserStatus,
+  activeAdminViewTab,
+  onAdminViewTabChange
 }) => {
-  const [activeAdminViewTab, setActiveAdminViewTab] = useState<'users' | 'audit'>('users');
   const [togglingId, setTogglingId] = useState<number | null>(null);
 
   const handleToggle = async (userId: number, currentStatus: string) => {
@@ -31,8 +34,8 @@ export const AdminConsole: React.FC<AdminConsoleProps> = ({
       <p style={{ color: 'hsl(var(--text-muted))', marginBottom: 24 }}>System administration, role auditing, and database tracking.</p>
 
       <div className="tabs-container">
-        <button className={`tab-btn ${activeAdminViewTab === 'users' ? 'active' : ''}`} onClick={() => setActiveAdminViewTab('users')}>Users Catalog</button>
-        <button className={`tab-btn ${activeAdminViewTab === 'audit' ? 'active' : ''}`} onClick={() => setActiveAdminViewTab('audit')}>Audit Trail Logs</button>
+        <button className={`tab-btn ${activeAdminViewTab === 'users' ? 'active' : ''}`} onClick={() => onAdminViewTabChange('users')}>Users Catalog</button>
+        <button className={`tab-btn ${activeAdminViewTab === 'audit' ? 'active' : ''}`} onClick={() => onAdminViewTabChange('audit')}>Audit Trail Logs</button>
       </div>
 
       {activeAdminViewTab === 'users' ? (
